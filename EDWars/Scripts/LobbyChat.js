@@ -38,15 +38,15 @@
             Campaign: function(campaign) {
                 var self = this;
                 var status = ["In Lobby", "In Game", "Finished"];
-                self.Id = ko.observable(campaign.Id);
-                self.url = ko.observable("/lobbies/matchmaking/" + campaign.Id);
-                self.users = ko.observable(campaign.BlueTeam.Players.length + campaign.RedTeam.Players.length + "/8");
-                self.mapName = ko.observable(campaign.Map.Name);
-                self.mapImage = ko.observable(campaign.Map.ImageUrl);
-                self.notes = ko.observable(campaign.Notes);
-                self.status = ko.observable(status[campaign.Status]);
-                self.redFaction = ko.observable(campaign.RedTeam.Faction.ImgUrl);
-                self.blueFaction = ko.observable(campaign.BlueTeam.Faction.ImgUrl);
+                self.Id = ko.observable(campaign.id);
+                self.url = ko.observable("/lobbies/matchmaking/" + campaign.id);
+                self.users = ko.observable(campaign.blueTeam.players.length + campaign.redTeam.players.length + "/8");
+                self.mapName = ko.observable(campaign.map.name);
+                self.mapImage = ko.observable(campaign.map.imageUrl);
+                self.notes = ko.observable(campaign.notes);
+                self.status = ko.observable(status[campaign.status]);
+                self.redFaction = ko.observable(campaign.redTeam.faction.imgUrl);
+                self.blueFaction = ko.observable(campaign.blueTeam.faction.imgUrl);
             }
         }
         
