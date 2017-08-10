@@ -36,10 +36,7 @@ namespace EDWars.Models
     public class MapPhysics
     {
         [Key]
-        public int id { get; set; }
-
-        [ForeignKey("MapId")]
-        public virtual Map map{ get; set; }
+        public int Id { get; set; }
 
         public int mass { get; set; }
         public int restitution { get; set; }
@@ -59,6 +56,8 @@ namespace EDWars.Models
         public int height { get; set; }
         public int subDivisions { get; set; }
         public string assetUrl { get; set; }
+        public int?  MapPhysicsId { get; set; }
+        [ForeignKey("MapPhysicsId")]
         public virtual MapPhysics physics { get; set; }
         public int redStartingPointX { get; set; }
         public int redStartingPointY { get; set; }
@@ -128,7 +127,7 @@ namespace EDWars.Models
     public class Commander
     {
         [Key]
-        public int id { get; set; }
+        public int Id { get; set; }
         public string name { get; set; }
         public string description { get; set; }
         public string imgUrl { get; set; } //for the html badge
@@ -157,18 +156,17 @@ namespace EDWars.Models
     public class CommanderAbility : Ability
     {
         [Key]
-        public int id { get; set; }
-
-        [ForeignKey("commander.id")]
-        public int commanderid { get; set; }
-        public virtual Commander Commander { get; set; }
-
+        public int Id { get; set; }
         public int levelAvailable { get; set; }
         public int damageOverTimeTick { get; set; } //the time it takes for the next damage tick to occur
         public int damagePerTick { get; set; } //how much damage does this ability do per tick if any
         public int criticalHitChance { get; set; } //if its a hit, what is the percent chance of a critical hit
         public int stackBuff { get; set; } //If set, the buff will stack, on enemies or on defensively
         public StackDepletesOn stackDepletesOn { get; set; }
+
+        public int CommanderId { get; set; }
+        [ForeignKey("CommanderId")]
+        public virtual Commander Commander { get; set; }
     }
 
     public class Game
@@ -250,7 +248,7 @@ namespace EDWars.Models
     public class FactionAbility : Ability
     {
         [Key]
-        public int id { get; set; }
+        public int Id { get; set; }
 
         public int FactionId { get; set; }
         public virtual Faction Faction { get; set; }
@@ -266,7 +264,7 @@ namespace EDWars.Models
 
         public int? CommanderId { get; set;}
 
-        [ForeignKey("commanderid")]
+        [ForeignKey("CommanderId")]
         public virtual Commander commander { get; set; }
         
         public bool Ready { get; set; }

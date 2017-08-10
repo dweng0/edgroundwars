@@ -403,7 +403,7 @@ namespace EDWars.Hubs
                 return;
             }
 
-            var commander = _commanders.FirstOrDefault(c => c.id == commanderId);
+            var commander = _commanders.FirstOrDefault(c => c.Id == commanderId);
 
             if (commander == null)
             {
