@@ -91,7 +91,7 @@ namespace EDWars.Hubs
 
         private List<Campaign> GetCampaigns()
         {
-            return db.Campaigns.Where(c => c.Status == Status.InLobby || c.Status == Status.InGame).Include(c => c.Map).ToList();
+            return db.Campaigns.Where(c => c.Status == Status.InLobby || c.Status == Status.InGame).Include(c => c.map).ToList();
         }
 
         public void SendMessage(string message)

@@ -14,7 +14,7 @@
 <script>
     $(document).ready(function() {
         System.import('GameInstanceManager').then(function(moduleLoader) {
-            return new moduleLoader.GameInstanceInstanceManager(@Model.Id);
+            return new moduleLoader.GameInstanceInstanceManager(@Model.id);
         });
     });
 </script>

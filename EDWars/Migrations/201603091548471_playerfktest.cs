@@ -7,22 +7,22 @@ namespace EDWars.Migrations
     {
         public override void Up()
         {
-            DropForeignKey("dbo.Players", "Team_Id", "dbo.Teams");
-            DropIndex("dbo.Players", new[] { "Team_Id" });
-            RenameColumn(table: "dbo.Players", name: "Team_Id", newName: "TeamId");
-            AlterColumn("dbo.Players", "TeamId", c => c.Int(nullable: false));
-            CreateIndex("dbo.Players", "TeamId");
-            AddForeignKey("dbo.Players", "TeamId", "dbo.Teams", "Id", cascadeDelete: true);
+            DropForeignKey("dbo.players", "Team_Id", "dbo.Teams");
+            DropIndex("dbo.players", new[] { "Team_Id" });
+            RenameColumn(table: "dbo.players", name: "Team_Id", newName: "teamId");
+            AlterColumn("dbo.players", "teamId", c => c.Int(nullable: false));
+            CreateIndex("dbo.players", "teamId");
+            AddForeignKey("dbo.players", "teamId", "dbo.Teams", "id", cascadeDelete: true);
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.Players", "TeamId", "dbo.Teams");
-            DropIndex("dbo.Players", new[] { "TeamId" });
-            AlterColumn("dbo.Players", "TeamId", c => c.Int());
-            RenameColumn(table: "dbo.Players", name: "TeamId", newName: "Team_Id");
-            CreateIndex("dbo.Players", "Team_Id");
-            AddForeignKey("dbo.Players", "Team_Id", "dbo.Teams", "Id");
+            DropForeignKey("dbo.players", "teamId", "dbo.Teams");
+            DropIndex("dbo.players", new[] { "teamId" });
+            AlterColumn("dbo.players", "teamId", c => c.Int());
+            RenameColumn(table: "dbo.players", name: "teamId", newName: "Team_Id");
+            CreateIndex("dbo.players", "Team_Id");
+            AddForeignKey("dbo.players", "Team_Id", "dbo.Teams", "id");
         }
     }
 }

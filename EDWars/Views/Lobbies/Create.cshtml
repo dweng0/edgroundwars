@@ -31,15 +31,15 @@
                     @Html.ValidationSummary(true)
 
             
-                    @Html.HiddenFor(model => model.MapId, new {htmlAttributes = new {@placeholder = "Map name", @class = "form-control"}})
+                    @Html.HiddenFor(model => model.mapId, new {htmlAttributes = new {@placeholder = "map name", @class = "form-control"}})
                  
                     <div class="form-group wow fadeInUp">
-                        <label class="sr-only" for="Map">Map Name</label>
-                        <input class="form-control" placeholder="Map Name" id="map-name"/>
+                        <label class="sr-only" for="map">map name</label>
+                        <input class="form-control" placeholder="map name" id="map-name"/>
                     </div>
                     <div class="ajax-hidden">
                         <div class="form-group wow fadeInUp" data-wow-delay=".2s">
-                            @Html.TextAreaFor(m => m.Notes, new {@placeholder = "Campaign Notes", @class = "form-control"})
+                            @Html.TextAreaFor(m => m.notes, new {@placeholder = "Campaign notes", @class = "form-control"})
                         </div>
                         <input onclick="addFormData();" type="submit" class="btn btn-success btn-block wow fadeInUp" value="create" data-wow-delay=".3s"/>
                     </div>
@@ -59,7 +59,7 @@
         $(".screen-height").height($(window).height());
 
         $(".map-select").click(function(e) {
-            $('#MapId').val(this.hash.substr(1));
+            $('#mapId').val(this.hash.substr(1));
             $('#map-name').val(this.dataset.mapname);
             alertify.success(this.dataset.mapname + ' map selected');
         });

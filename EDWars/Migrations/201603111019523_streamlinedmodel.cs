@@ -7,7 +7,7 @@ namespace EDWars.Migrations
     {
         public override void Up()
         {
-            AddColumn("dbo.Maps", "AssetUrl", c => c.String());
+            AddColumn("dbo.Maps", "assetUrl", c => c.String());
             DropColumn("dbo.Maps", "TextureMap");
             DropColumn("dbo.Maps", "HeightMap");
             DropColumn("dbo.Maps", "SkyBox");
@@ -18,7 +18,7 @@ namespace EDWars.Migrations
             AddColumn("dbo.Maps", "SkyBox", c => c.String());
             AddColumn("dbo.Maps", "HeightMap", c => c.String());
             AddColumn("dbo.Maps", "TextureMap", c => c.String());
-            DropColumn("dbo.Maps", "AssetUrl");
+            DropColumn("dbo.Maps", "assetUrl");
         }
     }
 }

@@ -340,7 +340,7 @@
         },
         mapHasChanged:function(map) {
             this.campaign.map(map);
-            this.addMessage("Admin: Map has changed to "+ map.Name);
+            this.addMessage("Admin: map has changed to "+ map.Name);
         }                       ,
         setMap:function(mapId) {
             MatchMaker.matchMaker.server.requestMapChange(mapId);

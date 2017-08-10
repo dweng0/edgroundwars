@@ -11,7 +11,7 @@
         <div class="form-group wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
             @Html.LabelFor(m => m.UserName) <br />
 
-            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @placeholder = "Username", @class = "form-control" } })
+            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @placeholder = "username", @class = "form-control" } })
         </div>
 
         <div class="form-group wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
@@ -28,7 +28,7 @@
     <div class="wow fadeInUp" data-wow-delay=".5s">
         <p class="message-info " style="font-weight: bold; text-align: center;">Or</p>
         @Ajax.ActionLink("Login", // <-- Text to display
-                 "Login", "Account", // <-- Action Method Name
+                 "Login", "Account", // <-- Action Method name
                  new AjaxOptions
                  {
                      UpdateTargetId = "campaign-area", // <-- DOM element ID to update

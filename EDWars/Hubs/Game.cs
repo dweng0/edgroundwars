@@ -86,13 +86,13 @@ namespace EDWars.Hubs
         {  
            var campaign = CheckCampaign(campaignId);
 
-           string groupId = campaign.Id.ToString();
+           string groupId = campaign.id.ToString();
            Groups.Add(Context.ConnectionId, groupId);
 
-           var user = campaign.RedTeam.Players.FirstOrDefault(c => c.Username == Context.User.Identity.Name) ??
-                      campaign.BlueTeam.Players.FirstOrDefault(c => c.Username == Context.User.Identity.Name);
+           var user = campaign.redTeam.players.FirstOrDefault(c => c.username == Context.User.Identity.Name) ??
+                      campaign.blueTeam.players.FirstOrDefault(c => c.username == Context.User.Identity.Name);
 
-           var team = (campaign.RedTeam.Id == user.TeamId) ? campaign.RedTeam : campaign.BlueTeam;
+           var team = (campaign.redTeam.id == user.teamId) ? campaign.redTeam : campaign.blueTeam;
 
             //check if user already exists (possible reconnect).
             var currentUser = GetUserDictionaryData();
@@ -109,8 +109,8 @@ namespace EDWars.Hubs
             }
           
             //notify everyone user has joined
-            Clients.Caller.addPlayerToWorld(team.Id, user.Username, ReturnObjectAsJSON(user), true); //inform the client they have been added
-            Clients.OthersInGroup(groupId).addPlayerToWorld(team.Id, user.Username, ReturnObjectAsJSON(user), false); //inform others that this client has been added
+            Clients.Caller.addPlayerToWorld(team.id, user.username, ReturnObjectAsJSON(user), true); //inform the client they have been added
+            Clients.OthersInGroup(groupId).addPlayerToWorld(team.id, user.username, ReturnObjectAsJSON(user), false); //inform others that this client has been added
         }
         
         /// <summary>
@@ -120,10 +120,10 @@ namespace EDWars.Hubs
         public void FinishedConnecting()
         {
             var user = GetUserDictionaryData();
-            SetPlayerLoaded(user.GroupId, user.Player.Username);
+            SetPlayerLoaded(user.GroupId, user.Player.username);
             var loadedPlayers = GetLoadedPlayers(user.GroupId);
 
-            if (loadedPlayers.Count >= (user.Campaign.RedTeam.Players.Count + user.Campaign.BlueTeam.Players.Count))
+            if (loadedPlayers.Count >= (user.Campaign.redTeam.players.Count + user.Campaign.blueTeam.players.Count))
             {
                Clients.Group(user.GroupId).startGame();
             }
@@ -198,10 +198,10 @@ namespace EDWars.Hubs
         /// <returns></returns>
         private Campaign CheckCampaign(int campaignId)
         {
-            var campaign =  _campaigns.FirstOrDefault(c => c.Id == campaignId);
+            var campaign =  _campaigns.FirstOrDefault(c => c.id == campaignId);
             if(!_campaigns.Any())
             {
-                campaign =_db.Campaigns.FirstOrDefault(c => c.Id == campaignId);
+                campaign =_db.Campaigns.FirstOrDefault(c => c.id == campaignId);
                 if (campaign == null)
                 {
                     Clients.Caller.error("Could not connect to game");

@@ -75,7 +75,7 @@ namespace EDWars.Hubs
             // After the code in this method completes, the client is informed that
             // the connection is established; for example, in a JavaScript client,
             // the start().done callback is executed.
-            //check if user is already connected with the same Name
+            //check if user is already connected with the same name
             if (!ConnectedUsers.ContainsKey(Context.User.Identity.Name))
             {  
                 ConnectedUsers.Add(Context.User.Identity.Name, new PlayerInfo());
@@ -91,9 +91,9 @@ namespace EDWars.Hubs
         if (user != null)
         {
             //notify others
-            Clients.OthersInGroup(user.GroupId).playerLeft(user.Team.Id, user.Player.Username);
+            Clients.OthersInGroup(user.GroupId).playerLeft(user.Team.id, user.Player.username);
             //remove from campaign team ... no id set so have to find and remove manually
-            user.Team.Players.Remove(user.Player);
+            user.Team.players.Remove(user.Player);
 
             //transfer leadership if this user is the leader
             if (user.TeamLeader)
@@ -133,11 +133,11 @@ namespace EDWars.Hubs
         /// <param name="campaignId"></param>
         public void HandShake(int campaignId)
         {   
-            var campaign = _campaigns.FirstOrDefault(c => c.Id == campaignId);
+            var campaign = _campaigns.FirstOrDefault(c => c.id == campaignId);
             if (campaign == null)
             {
                 //find and add if not
-                campaign = _db.Campaigns.FirstOrDefault(c => c.Id == campaignId);
+                campaign = _db.Campaigns.FirstOrDefault(c => c.id == campaignId);
                 if (campaign == null)
                 {
                     Clients.Caller.error("Campaign not found");
@@ -145,7 +145,7 @@ namespace EDWars.Hubs
                 }
                 if (campaign.Status == Status.InGame)
                 {
-                    Clients.Caller.gameIsStarting(campaign.Id);
+                    Clients.Caller.gameIsStarting(campaign.id);
                     return;
                 }
 
@@ -156,20 +156,20 @@ namespace EDWars.Hubs
                 }
 
                 //now check and set up factions
-                _factions = _db.Factions.Include(c => c.FactionAbilities).ToList();
+                _factions = _db.Factions.Include(c => c.factionAbilities).ToList();
                 _campaigns.Add(campaign);
             }
-            string groupId = campaign.Id.ToString();
-            //add user to group with campaign Id
+            string groupId = campaign.id.ToString();
+            //add user to group with campaign id
             Groups.Add(Context.ConnectionId, groupId);
 
             //create a player
             var player = new Player();
-            player.PlayerId = Context.User.Identity.Name; //requires that the username is unique then...
-            player.Username = Context.User.Identity.Name;
+            player.playerId = Context.User.Identity.Name; //requires that the username is unique then...
+            player.username = Context.User.Identity.Name;
             
             //now add a default commander
-            player.Commander = _commanders.First();
+            player.commander = _commanders.First();
 
             //set up player info for quick references
             var playerInfo = new PlayerInfo();
@@ -186,19 +186,19 @@ namespace EDWars.Hubs
             //give user back the campaign object and player object
             string jsonCampaign = ReturnCampaignJson(campaign);
 
-            Clients.Caller.AddCampaign(jsonCampaign, player.Username);
+            Clients.Caller.AddCampaign(jsonCampaign, player.username);
             var playerJson = ReturnPlayerString(player);
             Clients.Caller.playerJoined(playerJson, true); //tells the person that they have joined, allows them to set up user specific stuff
             Clients.OthersInGroup(groupId).playerJoined(playerJson); //tells everyone else you joined.
 
-           // var commanderJson = ReturnCommanderString(player.Commander);
+           // var commanderJson = ReturnCommanderString(player.commander);
 
-          //  Clients.Group(groupId).playerChangedCommander(playerInfo.Player.Username, commanderJson); //sets up your commander
+          //  Clients.Group(groupId).playerChangedCommander(playerInfo.Player.username, commanderJson); //sets up your commander
             joinTeam(campaign.SpectatingTeamId);
 
             //check if first player to join and set up master
-            if (!campaign.RedTeam.Players.Any() && !campaign.BlueTeam.Players.Any() &&
-                campaign.SpectatingTeam.Players.Count == 1)
+            if (!campaign.redTeam.players.Any() && !campaign.blueTeam.players.Any() &&
+                campaign.spectatingTeam.players.Count == 1)
             {
                 AssignNewMaster(campaign);
             }
@@ -208,36 +208,36 @@ namespace EDWars.Hubs
         {
            var player = new Player();
 
-            player = playerInfo.Campaign.RedTeam.Players.FirstOrDefault(c => c.Username == playerInfo.Player.Username);
+            player = playerInfo.Campaign.redTeam.players.FirstOrDefault(c => c.username == playerInfo.Player.username);
 
             if (player != null)
             {
-                playerInfo.Campaign.RedTeam.Players.Remove(player);
+                playerInfo.Campaign.redTeam.players.Remove(player);
             }
             else
             {
                   player =
-                    playerInfo.Campaign.SpectatingTeam.Players.FirstOrDefault(
-                        c => c.Username == playerInfo.Player.Username);
+                    playerInfo.Campaign.spectatingTeam.players.FirstOrDefault(
+                        c => c.username == playerInfo.Player.username);
 
                 if (player != null)
                 {
-                    playerInfo.Campaign.SpectatingTeam.Players.Remove(player);
+                    playerInfo.Campaign.spectatingTeam.players.Remove(player);
                 }
                 else
                 {
                      player =
-                    playerInfo.Campaign.RedTeam.Players.FirstOrDefault(
-                        c => c.Username == playerInfo.Player.Username);
+                    playerInfo.Campaign.redTeam.players.FirstOrDefault(
+                        c => c.username == playerInfo.Player.username);
                     if (player != null)
                     {
-                        playerInfo.Campaign.RedTeam.Players.Remove(player);
+                        playerInfo.Campaign.redTeam.players.Remove(player);
                     }
                 }
             }
-            if (ConnectedUsers.ContainsKey(playerInfo.Player.Username))
+            if (ConnectedUsers.ContainsKey(playerInfo.Player.username))
             {
-                 ConnectedUsers.Remove(playerInfo.Player.Username); 
+                 ConnectedUsers.Remove(playerInfo.Player.username); 
             }
         
         }
@@ -246,14 +246,14 @@ namespace EDWars.Hubs
         {
             var user = GetUserDictionaryData();
             user.Ready = true;
-            Clients.Group(user.GroupId).playerIsReady(user.Player.Username);
+            Clients.Group(user.GroupId).playerIsReady(user.Player.username);
         }
 
         public void playerNotReady()
         {
             var user = GetUserDictionaryData();
             user.Ready = false;
-            Clients.Group(user.GroupId).playerIsNotReady(user.Player.Username);
+            Clients.Group(user.GroupId).playerIsNotReady(user.Player.username);
         }
 
         public void RequestStartGameCountdown()
@@ -283,37 +283,37 @@ namespace EDWars.Hubs
 
         public void AssignNewTeamLeader(Team team)
         {
-            if (team.Players.Any())
+            if (team.players.Any())
             {
                 //get a user
-                var user = team.Players.First();
+                var user = team.players.First();
                 //update this users dictionary
-                var newTeamLeaderDict = ConnectedUsers[user.Username];
+                var newTeamLeaderDict = ConnectedUsers[user.username];
                 newTeamLeaderDict.TeamLeader = true;
 
                 //notify the user
-                Clients.User(user.Username).makeTeamLeader();
+                Clients.User(user.username).makeTeamLeader();
             }
         }
 
         public bool AssignNewMaster(Campaign campaign)
         {   
             var master = new Player();
-            if (campaign.BlueTeam.Players.Any() )
+            if (campaign.blueTeam.players.Any() )
             {
-                master = campaign.BlueTeam.Players.First();
+                master = campaign.blueTeam.players.First();
             }
-            else if (campaign.RedTeam.Players.Any())
+            else if (campaign.redTeam.players.Any())
             {
-                master = campaign.RedTeam.Players.First();
+                master = campaign.redTeam.players.First();
             }
-            else if (campaign.SpectatingTeam.Players.Any())
+            else if (campaign.spectatingTeam.players.Any())
             {
-                master = campaign.SpectatingTeam.Players.First();
+                master = campaign.spectatingTeam.players.First();
             }
             else
             {
-                var thisCampaign = _db.Campaigns.First(c => c.Id == campaign.Id);
+                var thisCampaign = _db.Campaigns.First(c => c.id == campaign.id);
 
                 thisCampaign.Status = Status.Finished;
                 _db.Entry(thisCampaign).State = EntityState.Modified;
@@ -322,7 +322,7 @@ namespace EDWars.Hubs
                 return false;
             }
 
-            var user = GetUserDataByName(master.Username);
+            var user = GetUserDataByName(master.username);
 
             if (user == null)
             {
@@ -331,7 +331,7 @@ namespace EDWars.Hubs
 
             user.MatchMakingMaster = true;
             //if we got this far, we have a new master
-            Clients.User(master.Username).makeMaster();
+            Clients.User(master.username).makeMaster();
             return true;
         }
 
@@ -350,13 +350,13 @@ namespace EDWars.Hubs
                 return;
             }
 
-            var map = _map.FirstOrDefault(c => c.Id == mapId);
+            var map = _map.FirstOrDefault(c => c.id == mapId);
             if (map == null)
             {
                 Clients.Caller.error("Could not find the map you requested");
             }
             //update the campaign object
-            user.Campaign.Map = map;
+            user.Campaign.map = map;
             Clients.Group(user.GroupId).mapHasChanged(map);
         }
 
@@ -364,17 +364,17 @@ namespace EDWars.Hubs
         {
             if (factionId == null || teamId == null)
             {
-                Clients.Caller.error("Could not update the team faction. Faction or Team data was not sanitized.");
+                Clients.Caller.error("Could not update the team faction. faction or Team data was not sanitized.");
                 return;
             }
 
             //check the user that made the request
             var user = GetUserDictionaryData();
 
-            if (user.TeamLeader && user.Team.Id == teamId.Value)
+            if (user.TeamLeader && user.Team.id == teamId.Value)
             {
                 //user is teamleader and in the team that requests the change... check faction
-                var faction = _factions.FirstOrDefault(c => c.Id == factionId.Value);
+                var faction = _factions.FirstOrDefault(c => c.id == factionId.Value);
 
                 if (faction == null)
                 {
@@ -382,10 +382,10 @@ namespace EDWars.Hubs
                 }
 
                 //now trigger the update
-                user.Team.FactionId = faction.Id;
-                user.Team.Faction = faction;
+                user.Team.FactionId = faction.id;
+                user.Team.faction = faction;
                 var factionJson = ReturnFactionString(faction);
-                Clients.Group(user.GroupId).teamChangedFaction(user.Team.Id, factionJson);
+                Clients.Group(user.GroupId).teamChangedFaction(user.Team.id, factionJson);
             }
             else
             {
@@ -403,7 +403,7 @@ namespace EDWars.Hubs
                 return;
             }
 
-            var commander = _commanders.FirstOrDefault(c => c.Id == commanderId);
+            var commander = _commanders.FirstOrDefault(c => c.id == commanderId);
 
             if (commander == null)
             {
@@ -413,14 +413,14 @@ namespace EDWars.Hubs
 
             var commanderJson = ReturnCommanderString(commander);
 
-            Clients.Group(user.GroupId).playerChangedCommander(user.Player.Username, commanderJson);
+            Clients.Group(user.GroupId).playerChangedCommander(user.Player.username, commanderJson);
 
         }
 
         /// <summary>
         /// When invoked allows a user to join a team based on its ID, informs other users and the data is stored on the 
         /// </summary>
-        /// <param name="teamId">The Id of the team the user wishes to join</param>
+        /// <param name="teamId">The id of the team the user wishes to join</param>
         public void joinTeam(int teamId)
         {
             PlayerInfo playerInfo = GetUserDictionaryData();
@@ -441,63 +441,63 @@ namespace EDWars.Hubs
             }
             else
             {
-                 currentTeamId = playerInfo.Team.Id;
+                 currentTeamId = playerInfo.Team.id;
             }
             
             //check if you can join the team with this id
             if (playerInfo.Campaign.BlueTeamId == teamId)
             {
-                if (playerInfo.Campaign.BlueTeam.Players.Count >= 8)
+                if (playerInfo.Campaign.blueTeam.players.Count >= 8)
                 {
                     Clients.Caller.warning("Cannot join team, they already have 8 players");
                     return;
                 }
                 else
                 {
-                    if (playerInfo.Team != null && playerInfo.Campaign.BlueTeamId == playerInfo.Team.Id)
+                    if (playerInfo.Team != null && playerInfo.Campaign.BlueTeamId == playerInfo.Team.id)
                     {
                         Clients.Caller.warning("Already on team");
                         return;
                     }
                     else
                     {
-                        newTeam = playerInfo.Campaign.BlueTeam;
+                        newTeam = playerInfo.Campaign.blueTeam;
                     }
                 }
             }
             else if (playerInfo.Campaign.RedTeamId == teamId)
             {
-                if (playerInfo.Campaign.RedTeam.Players.Count >= 8)
+                if (playerInfo.Campaign.redTeam.players.Count >= 8)
                 {
                     Clients.Caller.warning("Cannot join team, they already have 8 players");
                     return;
                 }
                 else
                 {
-                    if (playerInfo.Team != null && playerInfo.Campaign.RedTeamId == playerInfo.Team.Id)
+                    if (playerInfo.Team != null && playerInfo.Campaign.RedTeamId == playerInfo.Team.id)
                     {
                         Clients.Caller.warning("Already on team");
                         return;
                     }
                     else
                     {
-                        newTeam = playerInfo.Campaign.RedTeam;
+                        newTeam = playerInfo.Campaign.redTeam;
                     }
                 }
             }
             else
             {
-                if (playerInfo.Team != null && playerInfo.Campaign.SpectatingTeamId == playerInfo.Team.Id)
+                if (playerInfo.Team != null && playerInfo.Campaign.SpectatingTeamId == playerInfo.Team.id)
                 {
                     Clients.Caller.warning("Already on team");
                     return;
                 }
                 else
                 {
-                    newTeam = playerInfo.Campaign.SpectatingTeam;
+                    newTeam = playerInfo.Campaign.spectatingTeam;
                 }
             }
-            Clients.Group(playerInfo.GroupId).playerChangedTeam(currentTeamId, teamId, playerInfo.Player.Username);
+            Clients.Group(playerInfo.GroupId).playerChangedTeam(currentTeamId, teamId, playerInfo.Player.username);
             SwitchTeam(playerInfo.Team, newTeam, playerInfo.Player);
             playerInfo.Team = newTeam;
         }
@@ -509,10 +509,10 @@ namespace EDWars.Hubs
             var team = "";
             if (user.Team != null)
             {
-                team = "[" + user.Team.Name +"]";
+                team = "[" + user.Team.name +"]";
             }
             
-            Clients.Group(user.GroupId).chatMessage(team +  user.Player.Username + ": " + message);
+            Clients.Group(user.GroupId).chatMessage(team +  user.Player.username + ": " + message);
         }
 
         /// <summary>
@@ -526,10 +526,10 @@ namespace EDWars.Hubs
         {
             if (currentTeam != null)
             {
-                currentTeam.Players.Remove(player);
+                currentTeam.players.Remove(player);
             }
-            newTeam.Players.Add(player);
-            if (newTeam.Players.Count == 1)
+            newTeam.players.Add(player);
+            if (newTeam.players.Count == 1)
             {
                 AssignNewTeamLeader(newTeam);
             }
@@ -607,26 +607,26 @@ namespace EDWars.Hubs
         private void startGame(PlayerInfo user)
         {
             
-            var campaign = _db.Campaigns.FirstOrDefault(c => c.Id == user.Campaign.Id);
+            var campaign = _db.Campaigns.FirstOrDefault(c => c.id == user.Campaign.id);
             
-            var redTeam = user.Campaign.RedTeam;
+            var redTeam = user.Campaign.redTeam;
 
-            var blueTeam = user.Campaign.BlueTeam;
-            var spectators = user.Campaign.SpectatingTeam;
+            var blueTeam = user.Campaign.blueTeam;
+            var spectators = user.Campaign.spectatingTeam;
 
-            var map = user.Campaign.Map;
+            var map = user.Campaign.map;
 
-            campaign.RedTeam = redTeam;
-           campaign.BlueTeam = blueTeam;
-            campaign.SpectatingTeam = spectators;
+            campaign.redTeam = redTeam;
+           campaign.blueTeam = blueTeam;
+            campaign.spectatingTeam = spectators;
            
-            campaign.Map = map;
+            campaign.map = map;
             campaign.Status = Status.InGame;
 
             _db.Entry(campaign).State = EntityState.Modified;
-            _db.Entry(campaign.BlueTeam).State = EntityState.Modified;
-            _db.Entry(campaign.RedTeam).State = EntityState.Modified;
-            _db.Entry(campaign.SpectatingTeam).State = EntityState.Modified;
+            _db.Entry(campaign.blueTeam).State = EntityState.Modified;
+            _db.Entry(campaign.redTeam).State = EntityState.Modified;
+            _db.Entry(campaign.spectatingTeam).State = EntityState.Modified;
             
             _db.SaveChanges();
 

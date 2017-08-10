@@ -52,24 +52,21 @@ namespace EDWars.Controllers
         {
             if (ModelState.IsValid)
             {
-                var map = db.Maps.FirstOrDefault(c => c.Id == campaign.MapId.Value);
+                var map = db.Maps.FirstOrDefault(c => c.id == campaign.mapId.Value);
                 if (map == null)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
                 var Factions = db.Factions.ToList();
-                campaign.Map = map;
-                campaign.BlueTeam = new Team();
-                campaign.BlueTeam.Faction = Factions.FirstOrDefault(c => c.Name == "Alliance");
-                campaign.BlueTeam.Name = "Blue Team";
-                campaign.BlueTeam.Side = TeamSide.blue;
-                campaign.RedTeam = new Team();
-                campaign.RedTeam.Side = TeamSide.red;
-                campaign.RedTeam.Faction = Factions.FirstOrDefault(c => c.Name == "Federation");
-                campaign.RedTeam.Name = "Red Team";
-                campaign.SpectatingTeam = new Team();
-                campaign.SpectatingTeam.Name = "Spectators";
-                campaign.SpectatingTeam.Side = TeamSide.spectator;
+                campaign.map = map;
+                campaign.blueTeam = new Team();
+                campaign.blueTeam.faction = Factions.FirstOrDefault(c => c.name == "Alliance");
+                campaign.blueTeam.name = "Blue Team";
+                campaign.redTeam = new Team();
+                campaign.redTeam.faction = Factions.FirstOrDefault(c => c.name == "Federation");
+                campaign.redTeam.name = "Red Team";
+                campaign.spectatingTeam = new Team();
+                campaign.spectatingTeam.name = "Spectators";
 
                 db.Campaigns.Add(campaign);
                 db.SaveChanges();
@@ -79,7 +76,7 @@ namespace EDWars.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             LobbyChat.Static_Update_Campaigns(campaign);
-            return RedirectToAction("MatchMaking", new{Id =campaign.Id});
+            return RedirectToAction("MatchMaking", new{Id =campaign.id});
         }
 
         [Authorize]
@@ -90,7 +87,7 @@ namespace EDWars.Controllers
                 return HttpNotFound();
             }
 
-            var campaign = db.Campaigns.FirstOrDefault(c => c.Id == Id);
+            var campaign = db.Campaigns.FirstOrDefault(c => c.id == Id);
 
             if (campaign == null)
             {

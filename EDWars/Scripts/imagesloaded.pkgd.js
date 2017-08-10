@@ -72,7 +72,7 @@
 	 * Will return an object if you use a regex search. The object contains keys for each matched event. So /ba[rz]/ might return an object containing bar and baz. But only if you have either defined them with defineEvent or added some listeners to them.
 	 * Each property in the object response is an array of listener functions.
 	 *
-	 * @param {String|RegExp} evt Name of the event to return the listeners from.
+	 * @param {String|RegExp} evt name of the event to return the listeners from.
 	 * @return {Function[]|Object} All listener functions for the event.
 	 */
 	proto.getListeners = function (evt) {
@@ -102,7 +102,7 @@
 	/**
 	 * Fetches the requested listeners via getListeners but will always return the results inside an object. This is mainly for internal use but others may find it useful.
 	 *
-	 * @param {String|RegExp} evt Name of the event to return the listeners from.
+	 * @param {String|RegExp} evt name of the event to return the listeners from.
 	 * @return {Object} All listener functions for an event in an object.
 	 */
 	proto.getListenersAsObject = function (evt) {
@@ -123,7 +123,7 @@
 	 * If the listener returns true then it will be removed after it is called.
 	 * If you pass a regular expression as the event name then the listener will be added to all events that match it.
 	 *
-	 * @param {String|RegExp} evt Name of the event to attach the listener to.
+	 * @param {String|RegExp} evt name of the event to attach the listener to.
 	 * @param {Function} listener Method to be called when the event is emitted. If the function returns true then it will be removed after calling.
 	 * @return {Object} Current instance of EventEmitter for chaining.
 	 */
@@ -151,7 +151,7 @@
 	 * Defines an event name. This is required if you want to use a regex to add a listener to multiple events at once. If you don't do this then how do you expect it to know what event to add to? Should it just add to every possible match for a regex? No. That is scary and bad.
 	 * You need to tell it what event names should be matched by a regex.
 	 *
-	 * @param {String} evt Name of the event to create.
+	 * @param {String} evt name of the event to create.
 	 * @return {Object} Current instance of EventEmitter for chaining.
 	 */
 	proto.defineEvent = function (evt) {
@@ -177,7 +177,7 @@
 	 * Removes a listener function from the specified event.
 	 * When passed a regular expression as the event name, it will remove the listener from all events that match it.
 	 *
-	 * @param {String|RegExp} evt Name of the event to remove the listener from.
+	 * @param {String|RegExp} evt name of the event to remove the listener from.
 	 * @param {Function} listener Method to remove from the event.
 	 * @return {Object} Current instance of EventEmitter for chaining.
 	 */
@@ -327,7 +327,7 @@
 	 * So they will not arrive within the array on the other side, they will be separate.
 	 * You can also pass a regular expression to emit to all events that match it.
 	 *
-	 * @param {String|RegExp} evt Name of the event to emit and execute listeners for.
+	 * @param {String|RegExp} evt name of the event to emit and execute listeners for.
 	 * @param {Array} [args] Optional array of arguments to be passed to each listener.
 	 * @return {Object} Current instance of EventEmitter for chaining.
 	 */
@@ -365,7 +365,7 @@
 	 * Subtly different from emitEvent in that it will pass its arguments on to the listeners, as opposed to taking a single array of arguments to pass on.
 	 * As with emitEvent, you can pass a regex in place of the event name to emit to all events that match it.
 	 *
-	 * @param {String|RegExp} evt Name of the event to emit and execute listeners for.
+	 * @param {String|RegExp} evt name of the event to emit and execute listeners for.
 	 * @param {...*} Optional additional arguments to be passed to each listener.
 	 * @return {Object} Current instance of EventEmitter for chaining.
 	 */

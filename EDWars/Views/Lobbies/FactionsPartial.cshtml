@@ -4,26 +4,26 @@
     @foreach (var faction in Model)
     {
         <li>
-            <div class="faction-select" href="#@faction.Id" data-faction="@faction.Name">
+            <div class="faction-select" href="#@faction.id" data-faction="@faction.name">
                 <div class="map-maker" style="background-color: #eee;">
-                    <img src="@faction.ImgUrl" alt="@faction.Name" style="width: 150px; margin: auto;"/>
-                    <h2 style="text-align: center;">@faction.Name</h2>
-                    @if (faction.WinPercentage > 0)
+                    <img src="@faction.imgUrl" alt="@faction.name" style="width: 150px; margin: auto;"/>
+                    <h2 style="text-align: center;">@faction.name</h2>
+                    @if (faction.winPercentage > 0)
                     {
-                        <p style="text-align: center;">Win Rate: @faction.WinPercentage%</p>
+                        <p style="text-align: center;">Win Rate: @faction.winPercentage%</p>
                     }
                     <div class="faction-abilities">
                         <h3 style="text-align: center;">Abilities</h3>
                         <div style="width: 100%;">
-                            @foreach (var ability in faction.FactionAbilities)
+                            @foreach (var ability in faction.factionAbilities)
                             {
 
                                 <div style="width: 125px; margin: auto;">
-                                    <img src="@ability.TaskBarBadgeUrl"/>
+                                    <img src="@ability.taskBarBadgeUrl"/>
                                 </div>
                                 <div>
-                                    <h3>@ability.Name</h3>
-                                    <p>@ability.Description</p>
+                                    <h3>@ability.name</h3>
+                                    <p>@ability.description</p>
                                 </div>
 
                             }
@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="faction-picker" type="button" data-faction="@faction.Id" class="btn btn-primary">select</button>
+                <button class="faction-picker" type="button" data-faction="@faction.id" class="btn btn-primary">select</button>
             </div>
         </li>
     }

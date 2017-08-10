@@ -7,16 +7,16 @@ namespace EDWars.Migrations
     {
         public override void Up()
         {
-            AlterColumn("dbo.UserProfile", "Level", c => c.Int());
-            AlterColumn("dbo.UserProfile", "Wins", c => c.Int());
-            AlterColumn("dbo.UserProfile", "Losses", c => c.Int());
+            AlterColumn("dbo.UserProfile", "level", c => c.Int());
+            AlterColumn("dbo.UserProfile", "wins", c => c.Int());
+            AlterColumn("dbo.UserProfile", "losses", c => c.Int());
         }
         
         public override void Down()
         {
-            AlterColumn("dbo.UserProfile", "Losses", c => c.Int(nullable: false));
-            AlterColumn("dbo.UserProfile", "Wins", c => c.Int(nullable: false));
-            AlterColumn("dbo.UserProfile", "Level", c => c.Int(nullable: false));
+            AlterColumn("dbo.UserProfile", "losses", c => c.Int(nullable: false));
+            AlterColumn("dbo.UserProfile", "wins", c => c.Int(nullable: false));
+            AlterColumn("dbo.UserProfile", "level", c => c.Int(nullable: false));
         }
     }
 }

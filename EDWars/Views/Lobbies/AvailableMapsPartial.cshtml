@@ -3,11 +3,11 @@
     @foreach (var map in Model)
     {
         <li>
-            <a class="map-select" href="#@map.Id" data-mapname="@map.Name" data-mapid="@map.Id">
+            <a class="map-select" href="#@map.id" data-mapname="@map.name" data-mapid="@map.id">
                 <div class="map-maker" style="background-color: #eee;">
-                    <img src="@map.ImageUrl" alt="@map.Name" />
-                    <h2 style="text-align: center;">@map.Name</h2>
-                    <p style="text-align: center;">@map.Description</p>
+                    <img src="@map.imageUrl" alt="@map.name" />
+                    <h2 style="text-align: center;">@map.name</h2>
+                    <p style="text-align: center;">@map.description</p>
                 </div>
             </a>
         </li>

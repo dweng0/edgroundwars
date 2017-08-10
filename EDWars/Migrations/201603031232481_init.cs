@@ -58,7 +58,7 @@ namespace EDWars.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.FactionAbilities",
+                "dbo.factionAbilities",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
@@ -102,7 +102,7 @@ namespace EDWars.Migrations
                 .Index(t => t.FactionId);
             
             CreateTable(
-                "dbo.Players",
+                "dbo.players",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
@@ -142,7 +142,7 @@ namespace EDWars.Migrations
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.CommanderAbilities",
+                "dbo.abilities",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
@@ -233,29 +233,29 @@ namespace EDWars.Migrations
         {
             DropForeignKey("dbo.Campaigns", "SpectatingTeamId", "dbo.Teams");
             DropForeignKey("dbo.Campaigns", "RedTeamId", "dbo.Teams");
-            DropForeignKey("dbo.Campaigns", "MapId", "dbo.Maps");
+            DropForeignKey("dbo.Campaigns", "mapId", "dbo.Maps");
             DropForeignKey("dbo.Campaigns", "BlueTeamId", "dbo.Teams");
-            DropForeignKey("dbo.Players", "Team_Id", "dbo.Teams");
-            DropForeignKey("dbo.Players", "CommanderId", "dbo.Commanders");
-            DropForeignKey("dbo.CommanderAbilities", "CommanderId", "dbo.Commanders");
+            DropForeignKey("dbo.players", "Team_Id", "dbo.Teams");
+            DropForeignKey("dbo.players", "CommanderId", "dbo.Commanders");
+            DropForeignKey("dbo.abilities", "CommanderId", "dbo.Commanders");
             DropForeignKey("dbo.Teams", "FactionId", "dbo.Factions");
-            DropForeignKey("dbo.FactionAbilities", "FactionId", "dbo.Factions");
-            DropIndex("dbo.CommanderAbilities", new[] { "CommanderId" });
-            DropIndex("dbo.Players", new[] { "Team_Id" });
-            DropIndex("dbo.Players", new[] { "CommanderId" });
-            DropIndex("dbo.FactionAbilities", new[] { "FactionId" });
+            DropForeignKey("dbo.factionAbilities", "FactionId", "dbo.Factions");
+            DropIndex("dbo.abilities", new[] { "CommanderId" });
+            DropIndex("dbo.players", new[] { "Team_Id" });
+            DropIndex("dbo.players", new[] { "CommanderId" });
+            DropIndex("dbo.factionAbilities", new[] { "FactionId" });
             DropIndex("dbo.Teams", new[] { "FactionId" });
             DropIndex("dbo.Campaigns", new[] { "SpectatingTeamId" });
             DropIndex("dbo.Campaigns", new[] { "BlueTeamId" });
             DropIndex("dbo.Campaigns", new[] { "RedTeamId" });
-            DropIndex("dbo.Campaigns", new[] { "MapId" });
+            DropIndex("dbo.Campaigns", new[] { "mapId" });
             DropTable("dbo.UserProfile");
             DropTable("dbo.Games");
             DropTable("dbo.Maps");
-            DropTable("dbo.CommanderAbilities");
+            DropTable("dbo.abilities");
             DropTable("dbo.Commanders");
-            DropTable("dbo.Players");
-            DropTable("dbo.FactionAbilities");
+            DropTable("dbo.players");
+            DropTable("dbo.factionAbilities");
             DropTable("dbo.Factions");
             DropTable("dbo.Teams");
             DropTable("dbo.Campaigns");

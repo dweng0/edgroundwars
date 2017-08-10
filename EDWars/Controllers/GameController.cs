@@ -20,7 +20,7 @@ namespace EDWars.Controllers
                 return HttpNotFound();
             }
 
-            var campaign = db.Campaigns.FirstOrDefault(c => c.Id == Id);
+            var campaign = db.Campaigns.FirstOrDefault(c => c.id == Id);
             return View(campaign);
         }
 
@@ -32,7 +32,7 @@ namespace EDWars.Controllers
             }
 
 
-            var campaign = db.Campaigns.FirstOrDefault(c => c.Id == Id);
+            var campaign = db.Campaigns.FirstOrDefault(c => c.id == Id);
 
             if (campaign != null)
             {
