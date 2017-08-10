@@ -1,0 +1,15 @@
+﻿@model IEnumerable<EDWars.Models.Map>
+<ul class="bxslider mapslist" style="margin: 0px; list-style: none; padding: 0;">
+    @foreach (var map in Model)
+    {
+        <li>
+            <a class="map-select" href="#@map.Id" data-mapname="@map.Name" data-mapid="@map.Id">
+                <div class="map-maker" style="background-color: #eee;">
+                    <img src="@map.ImageUrl" alt="@map.Name" />
+                    <h2 style="text-align: center;">@map.Name</h2>
+                    <p style="text-align: center;">@map.Description</p>
+                </div>
+            </a>
+        </li>
+    }
+</ul>

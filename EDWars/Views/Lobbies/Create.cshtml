@@ -1,0 +1,75 @@
+﻿@using EDWars.Models
+@using Newtonsoft.Json.Linq
+@model EDWars.Models.Campaign
+         
+<section id="contact" class="pfblock screen-height">
+    <div class="container white">
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <div class="pfblock-header">
+                    <h2 class="pfblock-title" style="color: white;">Create Campaign</h2>
+                    <div class="pfblock-line"></div>
+                    <div class="pfblock-subtitle">
+                       Select a map
+                    </div>
+                </div>
+            </div>
+        </div><!-- .row -->
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+             @{ Html.RenderAction("AvailableMapsPartial"); }
+            </div>
+        </div>
+       
+
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                
+                @using (Html.BeginForm("Create", "Lobbies", FormMethod.Post, new { id = "create-campaign-form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
+
+            
+                    @Html.HiddenFor(model => model.MapId, new {htmlAttributes = new {@placeholder = "Map name", @class = "form-control"}})
+                 
+                    <div class="form-group wow fadeInUp">
+                        <label class="sr-only" for="Map">Map Name</label>
+                        <input class="form-control" placeholder="Map Name" id="map-name"/>
+                    </div>
+                    <div class="ajax-hidden">
+                        <div class="form-group wow fadeInUp" data-wow-delay=".2s">
+                            @Html.TextAreaFor(m => m.Notes, new {@placeholder = "Campaign Notes", @class = "form-control"})
+                        </div>
+                        <input onclick="addFormData();" type="submit" class="btn btn-success btn-block wow fadeInUp" value="create" data-wow-delay=".3s"/>
+                    </div>
+                }
+            </div>
+        </div><!-- .row -->
+    </div><!-- .container -->
+</section>
+<!-- Scroll to top -->
+<div class="scroll-up">
+    <a id="totop" href="/" style="width: 75px;">Lobbies</a>
+</div>
+@section scripts
+{
+
+    <script>
+        $(".screen-height").height($(window).height());
+
+        $(".map-select").click(function(e) {
+            $('#MapId').val(this.hash.substr(1));
+            $('#map-name').val(this.dataset.mapname);
+            alertify.success(this.dataset.mapname + ' map selected');
+        });
+
+        $(window).resize(function() {
+            $(".screen-height").height($(window).height());
+        });
+        $(document).ready(function() {
+            $('.bxslider').bxSlider();
+        });
+    </script>
+
+}

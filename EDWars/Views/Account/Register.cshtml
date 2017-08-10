@@ -1,0 +1,41 @@
+﻿
+@model EDWars.Models.RegisterModel
+
+<div class="col-lg-offset-3 col-lg-6">
+  @using (Ajax.BeginForm("Register", "Account", new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "campaign-area" }, new {@enctype = "multipart/form-data", @id = "regForm" }))
+  {
+
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary()
+
+        <div class="form-group wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
+            @Html.LabelFor(m => m.UserName) <br />
+
+            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @placeholder = "Username", @class = "form-control" } })
+        </div>
+
+        <div class="form-group wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
+            @Html.LabelFor(m => m.Password)<br />
+            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @placeholder = "Password", @class = "form-control" } })
+        </div>
+        <div class="form-group wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
+            @Html.LabelFor(m => m.ConfirmPassword)<br/>
+            @Html.EditorFor(model => model.ConfirmPassword, new {htmlAttributes = new {@placeholder = "Confirm Password", @class = "form-control"}})
+        </div>
+        <p class="message-info " style="font-weight: bold;">Remember your password. Accounts are none recoverable. (we don't store emails)</p>
+        <input type="submit" value="Quick Register" class="btn btn-success btn-block wow fadeInUp" data-wow-delay=".3s" />
+    }
+    <div class="wow fadeInUp" data-wow-delay=".5s">
+        <p class="message-info " style="font-weight: bold; text-align: center;">Or</p>
+        @Ajax.ActionLink("Login", // <-- Text to display
+                 "Login", "Account", // <-- Action Method Name
+                 new AjaxOptions
+                 {
+                     UpdateTargetId = "campaign-area", // <-- DOM element ID to update
+                     InsertionMode = InsertionMode.Replace, // <-- Replace the content of DOM element
+                     HttpMethod = "GET" // <-- HTTP method
+                 }, new { @class = "btn btn-success btn-block" })
+    </div>
+   
+    </div>
+

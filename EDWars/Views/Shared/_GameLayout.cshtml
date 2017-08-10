@@ -1,0 +1,29 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EDWars</title>
+
+    <script src="~/Scripts/jquery2-2.js"></script>
+    <script src="~/Scripts/underscore.min.js"></script>
+    <script src="~/Scripts/knockout-3.4.0.debug.js"></script>
+    @Scripts.Render("~/bundles/moduleloader")
+    <script src="~/Scripts/Dist/typescript.js"></script>
+    @Scripts.Render("~/bundle/babylon/dev")
+    @Scripts.Render("~/bundles/edwars")
+
+   
+</head>
+<body>
+
+    <!-- Home start -->
+    @RenderBody()
+
+    <!-- Home end -->
+  
+    <!-- Javascript files -->
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

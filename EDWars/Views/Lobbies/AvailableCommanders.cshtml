@@ -1,0 +1,31 @@
+﻿@model IEnumerable<EDWars.Models.Commander>
+<ul class="bxslider commanderlist" style="margin: 0px; list-style: none; padding: 0;">
+    @foreach (var commander in Model)
+    {
+        <li>
+            <a class="commander-select" data-commanderid="@commander.Id">
+                <div class="map-maker" style="background-color: #eee;">
+                    <img src="@commander.ImgUrl" alt="@commander.Name"/>
+                    <h2 style="text-align: center;">@commander.Name</h2>
+                    <p style="text-align: center;">@commander.Description</p>
+                </div>
+
+                <div class="commander-abilities">
+                    <ul class="abilities">
+                        @foreach (var ability in commander.CommanderAbilities)
+                        {
+                            <li class="ability">
+                                <div style="float: left; width: 64px;"><img class="ability-icon" src="@ability.TaskBarBadgeUrl" /></div>
+                                <div style="float: left; margin: 4px; width: calc(100% - 72px);">
+                                    <h3>@ability.Name <sup>lvl @ability.LevelAvailable</sup></h3>
+                                    <p>@ability.Description</p>
+                                   
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </a>
+        </li>
+    }
+</ul>

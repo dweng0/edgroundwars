@@ -1,0 +1,13 @@
+﻿{
+  "compilerOptions": {
+    "module": "system",
+    "noImplicitAny": true,
+    "outFile": "scripts/compiled/app.js",
+    "preserveConstEnums": true,
+    "removeComments": true,
+    "sourceMap": true
+  },
+  "include": [
+    "scripts/source/**/*"
+  ]
+}

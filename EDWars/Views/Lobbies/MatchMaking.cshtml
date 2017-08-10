@@ -1,0 +1,252 @@
+﻿@model EDWars.Models.Campaign
+
+<section class="pfblock pfblock-gray" style="background: url(/../images/matchmakingbg.jpg) no-repeat center center fixed; background-size: 100% auto; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
+    <div style="position: absolute">
+        <div class="spectators" style="position: relative; padding-top: 24px;">
+            <h3 class="pfblock-header wow fadeInDown animated" style="color: white;"> spectators</h3>
+            
+            <button class="btn btn-lg btn-block" id="joinSpectators" >Join</button>
+          
+            <div id="spectator-list" data-bind="foreach:campaign.spectatingTeam.players()">
+                <div class="player">
+                    <div style="float: left; text-align: right;">
+                        <h4 data-bind="text:Username"></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="background-image: url('/images/pattern.png'); background-color: rgba(221, 238, 255, 0.52); background-repeat: repeat;">
+        <div class="row" style="padding-top: 24px;">
+            <div class="col-lg-12">
+                <h3 style="color: white;"> You are on <span data-bind="text:teamName()"></span>
+                </h3>
+                <span style="color: white; font-size: 1.25em; float: right;">Auto Start: <span id="countDown">__</span></span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-3">
+                <div class="pfblock-header wow fadeInDown animated" style="visibility: visible; animation-name: fadeInDown;">
+                    <img style="max-width: 125px;" src="~/Images/logo-elite-dangerous.png"/>
+                    <div class="pfblock-line"></div>
+                </div>
+            </div>
+        </div>
+       
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="white-panel">
+                    <h3 style="color: white; text-align: center;" data-bind="text:campaign.redTeam.name">Red Team</h3>
+                    <!-- ko if: teamName() !== campaign.redTeam.name() -->
+                    <button class="btn btn-lg btn-block" data-bind="enable: campaign.redTeam.players().length < 5, event:{click: joinRed}" id="joinRed">Join</button>
+                    <!-- /ko -->
+                    <img src="~/Images/logo-elite-dangerous.png" data-bind="attr: { src: campaign.redTeam.faction.imgUrl()}" style="max-width: 50px; float: left;"/>
+                    <h4 style="color: white;"><span data-bind="text: campaign.redTeam.faction.name()"></span> 
+                        <!-- ko if: teamName() === campaign.redTeam.name() -->
+                        <!-- ko if: teamLeader() -->
+                        <button data-bind="event:{click:pickRedFaction}" class="btn btn-lg">Change</button>
+                        <!-- /ko -->
+                        <!-- /ko -->
+                    </h4>
+                    <hr/>
+                    <div id="player-list" data-bind="foreach:campaign.redTeam.players()">
+                        <div class="player">
+                            <div class="player-profile" data-bind="if: Commander()">
+                                <img src="~/Images/profile.png" data-bind="attr: { src: Commander().ImgUrl}"/>
+                            </div>
+                            <div style="float: right; width: 50%; text-align: right;">
+                                <h4 data-bind="text:Username"></h4>
+                                <h4 data-bind="text: Commander().Name">Commander chosen</h4>
+                                <!-- ko if: !me -->
+                                <div data-bind="if:Ready()">
+                                    <p class="label label-success">Ready</p>
+                                </div>
+                                <div data-bind="if:!Ready()">
+                                    <p class="label label-primary">Picking</p>
+                                </div>
+                                <!-- /ko -->
+                                <!-- ko if: me -->
+                                <div data-bind="if:!Ready()">
+                                    <button class="btn btn-xs btn-success" data-bind="event:{click: playerReady}" style="float: right;">Ready</button>
+                                </div>
+                                <div data-bind="if:Ready()">
+                                    <button class="btn btn-xs btn-danger" data-bind="event:{click: playerNotReady}" style="float: right;">Not Ready</button>
+                                </div>
+                                <!-- /ko -->
+                            </div>
+                            <div style="width: 100%; margin-top: 4px; float: left;">
+                                <!-- ko if: me -->
+                                    <div data-bind="if:!Ready()">
+                                        <button class="btn btn-xs btn-primary btn-block" data-bind="event:{click: commanderSelectBox}" style="float: left;">Select Commander</button>
+                                    </div>
+                                <!-- /ko -->
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="white-panel" style="margin-bottom: 12px;">
+                    <h4 style="color: white;"><span data-bind="text: campaign.map().Name"></span> 
+                      
+                    </h4>
+                    <hr/>
+                    <!-- ko if: matchMaster()  -->
+                    <button class="btn btn-lg btn-block" data-bind="event:{click:pickMap}">Change Map</button>
+                    <!-- /ko -->
+                    <div class="grid wow zoomIn">
+                        <figure class="effect-bubba">
+                            <img src="" data-bind="attr: { src: campaign.map().ImageUrl}"/>
+                            <figcaption>
+                                <h2 data-bind="text: campaign.map().Name"></h2>
+                                <p data-bind="text: campaign.map().Description"></p>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <!-- ko if: matchMaster() -->
+                    <button class="btn btn-success btn-block" data-bind="event:{click:requestStartGameCountDown}">Start</button>
+                    <!-- /ko -->
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="white-panel">
+                    <h3 style="color: white; text-align: center;" data-bind="text:campaign.blueTeam.name">Blue Team</h3>
+                    <!-- ko if: teamName() !== campaign.blueTeam.name() -->
+                    <button class="btn btn-lg btn-block" data-bind="enable: campaign.blueTeam.players().length < 5, event:{click: joinBlue}" id="joinblue">Join</button>
+                    <!-- /ko -->
+                    <img src="~/Images/logo-elite-dangerous.png" data-bind="attr: { src: campaign.blueTeam.faction.imgUrl}" style="max-width: 50px; float: left;" />
+                    <h4 style="color: white;">
+                        <span data-bind="text: campaign.blueTeam.faction.name"></span>
+                        <!-- ko if: teamName() === campaign.blueTeam.name() -->
+                        <!-- ko if: teamLeader() -->
+                        <button data-bind="visible:teamLeader(), event:{click:pickBlueFaction}" class="btn btn-lg">Change</button>
+                        <!-- /ko -->
+                        <!-- /ko -->
+                    </h4>
+                    <hr />
+                    <div id="blue-player-list" data-bind="foreach:campaign.blueTeam.players()">
+                        <div class="player">
+                            <div class="player-profile" data-bind="if: Commander()">
+                                <img src="~/Images/profile.png" data-bind="attr: { src: Commander().ImgUrl}" />
+                            </div>
+                            <div style="float: right; width: 50%; text-align: right;">
+                                <h4 data-bind="text:Username"></h4>
+                                <h4 data-bind="text: Commander().Name">Commander chosen</h4>
+                                <!-- ko if: !me -->
+                                <div data-bind="if:Ready()">
+                                    <p class="label label-success">Ready</p>
+                                </div>
+                                <div data-bind="if:!Ready()">
+                                    <p class="label label-primary">Picking</p>
+                                </div>
+                                <!-- /ko -->
+                                <!-- ko if: me -->
+                                <div data-bind="if:!Ready()">
+                                    <button class="btn btn-xs btn-success" data-bind="event:{click: playerReady}" style="float: right;">Ready</button>
+                                </div>
+                                <div data-bind="if:Ready()">
+                                    <button class="btn btn-xs btn-danger" data-bind="event:{click: playerNotReady}" style="float: right;">Not Ready</button>
+                                </div>
+                                <!-- /ko -->
+                            </div>
+                            <div style="width: 100%; margin-top: 4px; float: left;">
+                                <!-- ko if: me -->
+                                <div data-bind="if:!Ready()">
+                                    <button class="btn btn-xs btn-primary btn-block" data-bind="event:{click: commanderSelectBox}" style="float: left;">Select Commander</button>
+                                </div>
+                                <!-- /ko -->
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin-bottom: 24px;">
+            <div class="col-lg-12">
+                <div class="pfblock-subtitle" style="background-color: white; color: black; text-align: left; padding: 5px; margin-bottom: 4px;">
+                    <div id="chat-messages" data-bind="foreach:chat.messages" style="max-height: 250px; min-height: 80px; overflow-y: auto;">
+                        <div data-bind="text:$data"></div>
+                    </div>
+                </div>
+                <div class="form-group wow fadeInUp">
+                    <label class="sr-only" for="lobby_message">Message</label>
+                    <input type="text" class="form-control" id="lobby_message" name="lobby_message" placeholder="Message" data-bind="value:chat.message">
+                </div>
+                <button id="chat-button" type="submit" class="btn btn-lg btn-block" data-bind="click:sendMessage">
+                    Send Message
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                @*<pre data-bind="text: ko.toJSON($data, null, 2)"></pre>*@
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Scroll to top -->
+<div class="scroll-up">
+    <a id="totop" href="/lobbies" style="width: 75px;">Lobbies</a>
+</div>
+
+<div class="modal fade" tabindex="-1" role="dialog" id="factionslist">
+    <div class="modal-dialog" style="min-height: 300px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Choose a faction</h4>
+            </div>
+            <div class="modal-body" style="min-height: 300px;">
+              @{ Html.RenderAction("FactionsPartial"); }
+            </div>
+          
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<div class="modal fade" tabindex="-1" role="dialog" id="mapslist">
+    <div class="modal-dialog" style="min-height: 300px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" style="text-align: center;">Choose a map</h4>
+            </div>
+            <div class="modal-body" style="min-height: 300px;">
+                @{ Html.RenderAction("AvailableMapsPartial"); }
+            </div>
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" tabindex="-1" role="dialog" id="commanderList">
+    <div class="modal-dialog" style="min-height: 300px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" style="text-align: center;">Choose a commander</h4>
+            </div>
+            <div class="modal-body" style="min-height: 300px;">
+                @{ Html.RenderAction("AvailableCommanders"); }
+            </div>
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+@section scripts
+{
+<script src="~/Scripts/jquery.signalR-2.2.0.js"></script>
+<script src="~/SignalR/hubs"></script>
+<script src="~/Scripts/MatchMaking.js"></script>
+<script>
+    $(document).ready(function () {
+        window.slider = $('.factionslider').bxSlider();
+        window.mapSlider = $('.mapslist').bxSlider();
+        window.commandSlider = $('.commanderlist').bxSlider();
+    });
+</script>
+}

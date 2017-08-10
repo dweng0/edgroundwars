@@ -1,0 +1,39 @@
+﻿@using EDWars.Models
+@model IEnumerable<EDWars.Models.Faction>
+<ul class="factionslider" style="min-height: 300px;">
+    @foreach (var faction in Model)
+    {
+        <li>
+            <div class="faction-select" href="#@faction.Id" data-faction="@faction.Name">
+                <div class="map-maker" style="background-color: #eee;">
+                    <img src="@faction.ImgUrl" alt="@faction.Name" style="width: 150px; margin: auto;"/>
+                    <h2 style="text-align: center;">@faction.Name</h2>
+                    @if (faction.WinPercentage > 0)
+                    {
+                        <p style="text-align: center;">Win Rate: @faction.WinPercentage%</p>
+                    }
+                    <div class="faction-abilities">
+                        <h3 style="text-align: center;">Abilities</h3>
+                        <div style="width: 100%;">
+                            @foreach (var ability in faction.FactionAbilities)
+                            {
+
+                                <div style="width: 125px; margin: auto;">
+                                    <img src="@ability.TaskBarBadgeUrl"/>
+                                </div>
+                                <div>
+                                    <h3>@ability.Name</h3>
+                                    <p>@ability.Description</p>
+                                </div>
+
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="faction-picker" type="button" data-faction="@faction.Id" class="btn btn-primary">select</button>
+            </div>
+        </li>
+    }
+</ul>

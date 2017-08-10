@@ -1,0 +1,93 @@
+﻿<section class="pfblock pfblock-gray  screen-height" style="background: url(../images/stars.jpg); background-repeat: no-repeat;">
+    <div class="home-overlay"></div>
+    <div class="container white">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="pfblock-header wow fadeInDown">
+                    <h1 class="pfblock-title white">Campaigns</h1>
+                    <div class="pfblock-subtitle">
+                        Create or join a lobby to get into the fight.
+                    </div>
+                    <div class="pfblock-line"></div>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="campaign-area">
+           
+                @if (User.Identity.IsAuthenticated)
+                {
+                      Html.RenderAction("CreateCampaignPartial");
+                        }
+                        else
+                        {
+
+                        Html.RenderAction("Register", "Account", new { area = "" });
+                        }
+
+                    </div>
+        <div id="campaign-list" class="row" data-bind="foreach:campaigns.campaigns" style="max-height: 734px;overflow-y: auto; margin-bottom: 8px; margin-top: 8px;">
+            <div class="col-xs-12 col-sm-4 col-md-4">
+                <div class="grid wow zoomIn">
+                    <a data-bind="attr: { href: url}">
+                        <figure class="effect-bubba">
+                            <img src="~/Images/logo-elite-dangerous.png" data-bind="attr: { src: mapImage, alt: mapName}" />
+                            <figcaption>
+                                <h2 data-bind="text: mapName">Loading <span data-bind="text: users"></span></h2>
+                                <img data-bind="attr: { src: redFaction}" style="float: left; max-width: 50px;"/>
+                                <img data-bind="attr: { src: blueFaction}" style="float: right; max-width: 50px;" />
+                                <p style="text-decoration: underline;" data-bind="text: status"></p>
+                                <p data-bind="text: notes"><i class="fa fa-circle-o-notch fa-spin"></i></p>
+                            </figcaption>
+                        </figure>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row" id="chat-area">
+
+            <div class="col-sm-12">
+                <div class="pfblock-header wow fadeInUp">
+                    <h3 class="pfblock-title white">Comms Chatter</h3>
+                    <div class="pfblock-subtitle" style="background-color: white; color: black; text-align: left; padding: 5px; margin-bottom: 4px;">
+                        <div id="chat-messages" data-bind="foreach:chat.messages" style=" max-height: 250px; min-height: 80px; overflow-y: auto;">
+                            <div data-bind="text:$data"></div>
+                        </div>
+                    </div>
+                    <div class="form-group wow fadeInUp">
+                        <label class="sr-only" for="lobby_message">Message</label>
+                        <input type="text" class="form-control" id="lobby_message" name="lobby_message" placeholder="Message" data-bind="value:chat.message">
+                    </div>
+                    <button id="chat-button" type="submit" class="btn btn-primary btn-block btn-primary wow fadeInUp" data-wow-delay=".3s" data-bind="click:sendMessage">
+                        Send Message
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div><!-- .container -->
+</section>
+<!-- Scroll to top -->
+<div class="scroll-up">
+    <a id="totop" href="/" style="width: 75px;" >Home</a>
+</div>
+
+@section scripts
+{
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script src="~/Scripts/underscore.min.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.2.0.js"></script>
+    <script src="~/SignalR/hubs"></script>
+    <script src="~/Scripts/knockout-3.4.0.debug.js"></script>
+    <script src="~/Scripts/LobbyChat.js"></script>
+
+    <script>
+        $(".screen-height").height($(window).height());
+        $('#lobby_message').keyup(function(e) {
+            if (e.keyCode === 13) {
+                $("#chat-button").click();
+            }
+        })
+        $(window).resize(function () {
+            $(".screen-height").height($(window).height());
+        });
+    </script>
+}

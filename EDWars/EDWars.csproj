@@ -1,0 +1,654 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F1176D17-33FB-4339-89ED-E5AB7507AB4C}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EDWars</RootNamespace>
+    <AssemblyName>EDWars</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
+    <UseGlobalApplicationHostFile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.0\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.0\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.3.0.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Helpers">
+      <HintPath>..\packages\Microsoft.AspNet.WebHelpers.3.2.3\lib\net45\Microsoft.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.30506.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.30506.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.30506.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.0.0\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebPages.OAuth, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.OAuth.2.0.30506.0\lib\net40\Microsoft.Web.WebPages.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.AspNet, Version=4.1.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.AspNet.4.1.4.12333\lib\net45-full\DotNetOpenAuth.AspNet.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.Core, Version=4.1.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.Core.4.1.4.12333\lib\net45-full\DotNetOpenAuth.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OAuth.Consumer, Version=4.1.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.OAuth.Consumer.4.1.4.12333\lib\net45-full\DotNetOpenAuth.OAuth.Consumer.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OAuth, Version=4.1.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.OAuth.Core.4.1.4.12333\lib\net45-full\DotNetOpenAuth.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OpenId, Version=4.1.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.OpenId.Core.4.1.4.12333\lib\net45-full\DotNetOpenAuth.OpenId.dll</HintPath>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OpenId.RelyingParty, Version=4.1.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DotNetOpenAuth.OpenId.RelyingParty.4.1.4.12333\lib\net45-full\DotNetOpenAuth.OpenId.RelyingParty.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.OData, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.OData.4.0.30506\lib\net40\System.Web.Http.OData.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.Edm, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Data.Edm.5.2.0\lib\net40\Microsoft.Data.Edm.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.OData, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Data.OData.5.2.0\lib\net40\Microsoft.Data.OData.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Spatial, Version=5.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\System.Spatial.5.2.0\lib\net40\System.Spatial.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.3.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.3.0\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="WebMatrix.Data, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.Data.3.2.3\lib\net45\WebMatrix.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="WebMatrix.WebData, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.WebData.3.2.3\lib\net45\WebMatrix.WebData.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\AuthConfig.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\GameController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LobbiesController.cs" />
+    <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\Timeout.cs" />
+    <Compile Include="Hubs\Game.cs" />
+    <Compile Include="Hubs\LobbyChat.cs" />
+    <Compile Include="Hubs\MatchMaking.cs" />
+    <Compile Include="Migrations\201603031232481_init.cs" />
+    <Compile Include="Migrations\201603031232481_init.Designer.cs">
+      <DependentUpon>201603031232481_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603031239306_ProfileFixNulls.cs" />
+    <Compile Include="Migrations\201603031239306_ProfileFixNulls.Designer.cs">
+      <DependentUpon>201603031239306_ProfileFixNulls.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603091548471_playerfktest.cs" />
+    <Compile Include="Migrations\201603091548471_playerfktest.Designer.cs">
+      <DependentUpon>201603091548471_playerfktest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603110859427_texturemapandheightmap.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Migrations\201603110859427_texturemapandheightmap.Designer.cs">
+      <DependentUpon>201603110859427_texturemapandheightmap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603110901390_skyboxprop.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Migrations\201603110901390_skyboxprop.Designer.cs">
+      <DependentUpon>201603110901390_skyboxprop.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603111019523_streamlinedmodel.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Migrations\201603111019523_streamlinedmodel.Designer.cs">
+      <DependentUpon>201603111019523_streamlinedmodel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603111519550_mapstartingpoint.cs" />
+    <Compile Include="Migrations\201603111519550_mapstartingpoint.Designer.cs">
+      <DependentUpon>201603111519550_mapstartingpoint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201603112003130_defaultteamsides.cs" />
+    <Compile Include="Migrations\201603112003130_defaultteamsides.Designer.cs">
+      <DependentUpon>201603112003130_defaultteamsides.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\Campaign.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Startup.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="assets\commanders\izella\texture.jpg" />
+    <Content Include="assets\commanders\r\texture.jpg" />
+    <Content Include="assets\maps\stargazer\ground.jpg" />
+    <Content Include="assets\maps\stargazer\heightMap.png" />
+    <Content Include="assets\maps\stargazer\oldheightMap.png" />
+    <Content Include="assets\maps\stargazer\skybox\skybox_nx.jpg" />
+    <Content Include="assets\maps\stargazer\skybox\skybox_ny.jpg" />
+    <Content Include="assets\maps\stargazer\skybox\skybox_nz.jpg" />
+    <Content Include="assets\maps\stargazer\skybox\skybox_px.jpg" />
+    <Content Include="assets\maps\stargazer\skybox\skybox_py.jpg" />
+    <Content Include="assets\maps\stargazer\skybox\skybox_pz.jpg" />
+    <Content Include="Content\alertify.css" />
+    <Content Include="Content\alertify.min.css" />
+    <Content Include="Content\alertify.rtl.css" />
+    <Content Include="Content\alertify.rtl.min.css" />
+    <Content Include="Content\animate.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\font-awesome.css" />
+    <Content Include="Content\font-awesome.min.css" />
+    <Content Include="Content\jquery.bxslider.css" />
+    <Content Include="Content\themes\bootstrap.css" />
+    <Content Include="Content\themes\bootstrap.min.css" />
+    <Content Include="Content\themes\bootstrap.rtl.css" />
+    <Content Include="Content\themes\bootstrap.rtl.min.css" />
+    <Content Include="Content\themes\default.css" />
+    <Content Include="Content\themes\default.min.css" />
+    <Content Include="Content\themes\default.rtl.css" />
+    <Content Include="Content\themes\default.rtl.min.css" />
+    <Content Include="Content\themes\semantic.css" />
+    <Content Include="Content\themes\semantic.min.css" />
+    <Content Include="Content\themes\semantic.rtl.css" />
+    <Content Include="Content\themes\semantic.rtl.min.css" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
+    <Content Include="fonts\Simple-Line-Icons.dev.svg" />
+    <Content Include="fonts\Simple-Line-Icons.svg" />
+    <Content Include="Content\simple-line-icons.css" />
+    <Content Include="Content\style.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
+    <Content Include="Content\themes\base\jquery.ui.all.css" />
+    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="Content\themes\base\jquery.ui.base.css" />
+    <Content Include="Content\themes\base\jquery.ui.button.css" />
+    <Content Include="Content\themes\base\jquery.ui.core.css" />
+    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
+    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
+    <Content Include="Content\themes\base\jquery.ui.slider.css" />
+    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
+    <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\minified\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.accordion.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.autocomplete.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.button.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.core.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.datepicker.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.dialog.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.progressbar.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.resizable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.selectable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\Simple-Line-Icons.eot" />
+    <Content Include="fonts\Simple-Line-Icons.ttf" />
+    <Content Include="fonts\Simple-Line-Icons.woff" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Scripts\compiled\app.js.map" />
+    <None Include="Scripts\jquery-1.8.2.intellisense.js" />
+    <Content Include="Content\images\bx_loader.gif" />
+    <Content Include="Content\images\controls.png" />
+    <Content Include="Images\alliance.png" />
+    <Content Include="Images\Empire.png" />
+    <Content Include="Images\Federation.png" />
+    <Content Include="Images\galaxy.jpg" />
+    <Content Include="Images\graphics\2twapBt.jpg" />
+    <Content Include="Images\graphics\abilities\commander\adaptiveshield.png" />
+    <Content Include="Images\graphics\abilities\commander\airstrike.png" />
+    <Content Include="Images\graphics\abilities\commander\assassinate.png" />
+    <Content Include="Images\graphics\abilities\commander\blockbuster.png" />
+    <Content Include="Images\graphics\abilities\commander\carpetbomb.png" />
+    <Content Include="Images\graphics\abilities\commander\clustervolley.png" />
+    <Content Include="Images\graphics\abilities\commander\crosshair.png" />
+    <Content Include="Images\graphics\abilities\commander\dash.png" />
+    <Content Include="Images\graphics\abilities\commander\deadlystrike.png" />
+    <Content Include="Images\graphics\abilities\commander\echoshield.png" />
+    <Content Include="Images\graphics\abilities\commander\emp.png" />
+    <Content Include="Images\graphics\abilities\commander\entrapment.png" />
+    <Content Include="Images\graphics\abilities\commander\gaurdedtower.png" />
+    <Content Include="Images\graphics\abilities\commander\glare.png" />
+    <Content Include="Images\graphics\abilities\commander\hidden.png" />
+    <Content Include="Images\graphics\abilities\commander\intimidatingshield.png" />
+    <Content Include="Images\graphics\abilities\commander\meteorstrike.png" />
+    <Content Include="Images\graphics\abilities\commander\mine.png" />
+    <Content Include="Images\graphics\abilities\commander\minetoss.png" />
+    <Content Include="Images\graphics\abilities\commander\missileswarm.png" />
+    <Content Include="Images\graphics\abilities\commander\mothershipstrike.png" />
+    <Content Include="Images\graphics\abilities\commander\overcharge.png" />
+    <Content Include="Images\graphics\abilities\commander\overloadingbeam.png" />
+    <Content Include="Images\graphics\abilities\commander\paranoia.png" />
+    <Content Include="Images\graphics\abilities\commander\poison.png" />
+    <Content Include="Images\graphics\abilities\commander\powersapshield.png" />
+    <Content Include="Images\graphics\abilities\commander\primalaggression.png" />
+    <Content Include="Images\graphics\abilities\commander\rampage.png" />
+    <Content Include="Images\graphics\abilities\commander\reflectiveshield.png" />
+    <Content Include="Images\graphics\abilities\commander\root.png" />
+    <Content Include="Images\graphics\abilities\commander\shatter.png" />
+    <Content Include="Images\graphics\abilities\commander\silentrunning.png" />
+    <Content Include="Images\graphics\abilities\commander\slugstrike.png" />
+    <Content Include="Images\graphics\abilities\commander\smokescreen.png" />
+    <Content Include="Images\graphics\abilities\commander\snare.png" />
+    <Content Include="Images\graphics\abilities\commander\stomp.png" />
+    <Content Include="Images\graphics\abilities\commander\strafe.png" />
+    <Content Include="Images\graphics\abilities\commander\suspicion.png" />
+    <Content Include="Images\graphics\abilities\commander\swagger.png" />
+    <Content Include="Images\graphics\abilities\commander\teleport.png" />
+    <Content Include="Images\graphics\abilities\commander\trap.png" />
+    <Content Include="Images\graphics\abilities\commander\zen.png" />
+    <Content Include="Images\graphics\abilities\faction\Alliance\herdimmunity.png" />
+    <Content Include="Images\graphics\abilities\faction\Alliance\mobmentality.png" />
+    <Content Include="Images\graphics\abilities\faction\Empire\expansion.png" />
+    <Content Include="Images\graphics\abilities\faction\Empire\measurement.png" />
+    <Content Include="Images\graphics\abilities\faction\Federation\greed.png" />
+    <Content Include="Images\graphics\abilities\faction\Federation\punishment.png" />
+    <Content Include="Images\graphics\abilities\faction\icons.jpg" />
+    <Content Include="Images\graphics\abilities\faction\mobmentality.png" />
+    <Content Include="Images\graphics\Commanders\7YLyTBQ.png" />
+    <Content Include="Images\graphics\Commanders\9V3kA3n.jpg" />
+    <Content Include="Images\graphics\Commanders\A5e7geF.jpg" />
+    <Content Include="Images\graphics\Commanders\B16eSsT.jpg" />
+    <Content Include="Images\graphics\Commanders\E8Ps6ty.png" />
+    <Content Include="Images\graphics\Commanders\fJlckS3.png" />
+    <Content Include="Images\graphics\Commanders\II1qSqK.jpg" />
+    <Content Include="Images\graphics\Commanders\iL28QDU.png" />
+    <Content Include="Images\graphics\Commanders\KshNzFv.png" />
+    <Content Include="Images\graphics\Commanders\kwXSCLP.jpg" />
+    <Content Include="Images\graphics\Commanders\lC2qf2h.jpg" />
+    <Content Include="Images\graphics\Commanders\OjvFoSF.jpg" />
+    <Content Include="Images\graphics\Commanders\ox3dOVI.jpg" />
+    <Content Include="Images\graphics\Commanders\Sleo3ov.png" />
+    <Content Include="Images\graphics\Commanders\U4TI8Zj.png" />
+    <Content Include="Images\graphics\Commanders\uGeqL08.png" />
+    <Content Include="Images\graphics\Commanders\izella.png" />
+    <Content Include="Images\graphics\Commanders\r.png" />
+    <Content Include="Images\graphics\Commanders\YkT5xl5.png" />
+    <Content Include="Images\graphics\da4421f4bb6faec7319babb829b82027.jpg" />
+    <Content Include="Images\graphics\nSFexii.jpg" />
+    <Content Include="Images\graphics\sdbg4gT.jpg" />
+    <Content Include="Images\graphics\sprites\FykFrGY.png" />
+    <Content Include="Images\logo-elite-dangerous.png" />
+    <Content Include="Images\maps\shipwreck.png" />
+    <Content Include="Images\maps\stargazer.jpg" />
+    <Content Include="Images\maps\ancientruins.jpg" />
+    <Content Include="Images\maps\hill63.jpg" />
+    <Content Include="Images\matchmakingbg.jpg" />
+    <Content Include="Images\pattern.png" />
+    <Content Include="Images\preloader.gif" />
+    <Content Include="Images\profile.png" />
+    <Content Include="Images\stars.jpg" />
+    <Content Include="Licenses.txt" />
+    <Content Include="Scripts\alertify.min.js" />
+    <Content Include="Scripts\babylon.core.js" />
+    <Content Include="Scripts\babylon.js" />
+    <Content Include="Scripts\babylon.max.js" />
+    <Content Include="Scripts\babylon.noworker.js" />
+    <Content Include="Scripts\babylonjs.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Class.js" />
+    <Content Include="Scripts\compiled\app.js" />
+    <Content Include="Scripts\custom.js" />
+    <Content Include="Scripts\Dist\systemjs.js" />
+    <Content Include="Scripts\Dist\typescript.js" />
+    <Content Include="Scripts\hand.minified-1.2.js" />
+    <Content Include="Scripts\imagesloaded.pkgd.js" />
+    <Content Include="Scripts\jquery-1.11.1.min.js" />
+    <Content Include="Scripts\jquery-1.8.2.js" />
+    <Content Include="Scripts\jquery-1.8.2.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui-1.8.24.js" />
+    <Content Include="Scripts\jquery-ui-1.8.24.min.js" />
+    <Content Include="Scripts\jquery.bxslider.min.js" />
+    <Content Include="Scripts\jquery.cbpQTRotator.js" />
+    <Content Include="Scripts\jquery.easypiechart.js" />
+    <Content Include="Scripts\jquery.parallax-1.1.3.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.0.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.0.min.js" />
+    <Content Include="Scripts\jquery.sticky.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jquery2-2.js" />
+    <Content Include="Scripts\knockout-3.4.0.debug.js" />
+    <Content Include="Scripts\knockout-3.4.0.js" />
+    <Content Include="Scripts\LobbyChat.js" />
+    <Content Include="Scripts\MatchMaking.js" />
+    <Content Include="Scripts\modernizer2-8.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\modernizr.custom.js" />
+    <Content Include="Scripts\oimo.js" />
+    <Content Include="Scripts\poly2tri.js" />
+    <Content Include="Scripts\smoothscroll.js" />
+    <Content Include="Scripts\underscore.js" />
+    <Content Include="Scripts\underscore.min.js" />
+    <Content Include="Scripts\waypoints.min.js" />
+    <Content Include="Scripts\wow.min.js" />
+    <Content Include="Views\Lobbies\Index.cshtml" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Images\accent.png" />
+    <Content Include="Images\bullet.png" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\_RemoveExternalLoginsPartial.cshtml" />
+    <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Manage.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\Lobbies\Create.cshtml" />
+    <Content Include="Views\Lobbies\MatchMaking.cshtml" />
+    <Content Include="Scripts\underscore.min.map" />
+    <Content Include="Views\Lobbies\CreateCampaignPartial.cshtml" />
+    <Content Include="Views\Lobbies\AvailableMapsPartial.cshtml" />
+    <Content Include="Views\Lobbies\FactionsPartial.cshtml" />
+    <Content Include="Views\Lobbies\AvailableCommanders.cshtml" />
+    <Content Include="Views\Shared\_GameLayout.cshtml" />
+    <Content Include="Views\Game\Play.cshtml" />
+    <Content Include="tsconfig.json" />
+    <Content Include="Views\Shared\_tscripttest.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201603031232481_init.resx">
+      <DependentUpon>201603031232481_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603031239306_ProfileFixNulls.resx">
+      <DependentUpon>201603031239306_ProfileFixNulls.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603091548471_playerfktest.resx">
+      <DependentUpon>201603091548471_playerfktest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603110859427_texturemapandheightmap.resx">
+      <DependentUpon>201603110859427_texturemapandheightmap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603110901390_skyboxprop.resx">
+      <DependentUpon>201603110901390_skyboxprop.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603111019523_streamlinedmodel.resx">
+      <DependentUpon>201603111019523_streamlinedmodel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603111519550_mapstartingpoint.resx">
+      <DependentUpon>201603111519550_mapstartingpoint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201603112003130_defaultteamsides.resx">
+      <DependentUpon>201603112003130_defaultteamsides.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\source\assets\Asset.ts" />
+    <TypeScriptCompile Include="Scripts\source\assets\GameStatistics.ts" />
+    <TypeScriptCompile Include="Scripts\source\assets\Map.ts" />
+    <TypeScriptCompile Include="Scripts\source\assets\Player.ts" />
+    <TypeScriptCompile Include="Scripts\source\core\AssetsManager.ts" />
+    <TypeScriptCompile Include="Scripts\source\core\TransportLayer.ts" />
+    <TypeScriptCompile Include="Scripts\source\Game.ts" />
+    <TypeScriptCompile Include="Scripts\source\GameInstanceManager.ts" />
+    <TypeScriptCompile Include="Scripts\source\models\campaign.ts" />
+    <TypeScriptCompile Include="Scripts\source\models\Commander.ts" />
+    <TypeScriptCompile Include="Scripts\source\models\Faction.ts" />
+    <TypeScriptCompile Include="Scripts\source\models\Map.ts" />
+    <TypeScriptCompile Include="Scripts\source\models\Player.ts" />
+    <TypeScriptCompile Include="Scripts\source\models\Team.ts" />
+    <TypeScriptCompile Include="Scripts\typings\babylonjs\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\jquery\index.d.ts" />
+    <TypeScriptCompile Include="Scripts\typings\signalr\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>Always</RunPostBuildEvent>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>56870</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:56870/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>
