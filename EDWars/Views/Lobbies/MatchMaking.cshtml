@@ -19,7 +19,7 @@
     <div class="container" style="background-image: url('/images/pattern.png'); background-color: rgba(221, 238, 255, 0.52); background-repeat: repeat;">
         <div class="row" style="padding-top: 24px;">
             <div class="col-lg-12">
-                <h3 style="color: white;"> you are on <span data-bind="text:teamname()"></span>
+                <h3 style="color: white;"> you are on <span data-bind="text:teamName()"></span>
                 </h3>
                 <span style="color: white; font-size: 1.25em; float: right;">Auto Start: <span id="countDown">__</span></span>
             </div>
@@ -37,12 +37,12 @@
             <div class="col-lg-3">
                 <div class="white-panel">
                     <h3 style="color: white; text-align: center;" data-bind="text:campaign.redTeam.name">Red Team</h3>
-                    <!-- ko if: teamname() !== campaign.redTeam.name() -->
+                    <!-- ko if: teamName() !== campaign.redTeam.name() -->
                     <button class="btn btn-lg btn-block" data-bind="enable: campaign.redTeam.players().length < 5, event:{click: joinRed}" id="joinRed">Join</button>
                     <!-- /ko -->
                     <img src="~/Images/logo-elite-dangerous.png" data-bind="attr: { src: campaign.redTeam.faction.imgUrl()}" style="max-width: 50px; float: left;"/>
                     <h4 style="color: white;"><span data-bind="text: campaign.redTeam.faction.name()"></span> 
-                        <!-- ko if: teamname() === campaign.redTeam.name() -->
+                        <!-- ko if: teamName() === campaign.redTeam.name() -->
                         <!-- ko if: teamLeader() -->
                         <button data-bind="event:{click:pickRedfaction}" class="btn btn-lg">Change</button>
                         <!-- /ko -->
@@ -93,7 +93,7 @@
                     </h4>
                     <hr/>
                     <!-- ko if: matchMaster()  -->
-                    <button class="btn btn-lg btn-block" data-bind="event:{click:pickmap}">Change map</button>
+                    <button class="btn btn-lg btn-block" data-bind="event:{click:pickMap}">Change map</button>
                     <!-- /ko -->
                     <div class="grid wow zoomIn">
                         <figure class="effect-bubba">
@@ -112,13 +112,13 @@
             <div class="col-lg-3">
                 <div class="white-panel">
                     <h3 style="color: white; text-align: center;" data-bind="text:campaign.blueTeam.name">Blue Team</h3>
-                    <!-- ko if: teamname() !== campaign.blueTeam.name() -->
+                    <!-- ko if: teamName() !== campaign.blueTeam.name() -->
                     <button class="btn btn-lg btn-block" data-bind="enable: campaign.blueTeam.players().length < 5, event:{click: joinBlue}" id="joinblue">Join</button>
                     <!-- /ko -->
                     <img src="~/Images/logo-elite-dangerous.png" data-bind="attr: { src: campaign.blueTeam.faction.imgUrl}" style="max-width: 50px; float: left;" />
                     <h4 style="color: white;">
                         <span data-bind="text: campaign.blueTeam.faction.name"></span>
-                        <!-- ko if: teamname() === campaign.blueTeam.name() -->
+                        <!-- ko if: teamName() === campaign.blueTeam.name() -->
                         <!-- ko if: teamLeader() -->
                         <button data-bind="visible:teamLeader(), event:{click:pickBluefaction}" class="btn btn-lg">Change</button>
                         <!-- /ko -->

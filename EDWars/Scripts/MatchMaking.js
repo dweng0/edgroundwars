@@ -2,7 +2,7 @@
 (function () {
     var MatchMaker = {
         matchMaker: $.connection.matchMaking,
-        gameId: undefined,
+        gameid: undefined,
         viewModel: undefined,
         playerUsername: undefined,
         teamName: undefined,
@@ -17,18 +17,18 @@
             }
             this.sendSetup();
             pathName = pathName.substr(pathName.lastIndexOf('/') + 1);
-            this.gameId = pathName;
+            this.gameid = pathName;
         },
         connected: function() {
             
            
-            this.matchMaker.server.handShake(this.gameId).fail(function(e) {
+            this.matchMaker.server.handShake(this.gameid).fail(function(e) {
                 alertify.error("failed to connect to game lobby");
                 console.log(e);
             });
         },
         sendSetup: function() {
-            this.matchMaker.client.AddCampaign = this.completeHandshake.bind(this);
+            this.matchMaker.client.Addcampaign = this.completeHandshake.bind(this);
             this.matchMaker.client.warning = function(message) {
                 alertify.warning(message);
             };
@@ -42,13 +42,13 @@
             this.matchMaker.client.chatMessage = this.lateBindingFunctions.addMessage.bind(this);
             this.matchMaker.client.makeTeamLeader = this.lateBindingFunctions.makeTeamLeader.bind(this);
             this.matchMaker.client.makeMaster = this.lateBindingFunctions.makeMaster.bind(this);
-            this.matchMaker.client.teamChangedFaction = this.lateBindingFunctions.teamChangedFaction.bind(this);
+            this.matchMaker.client.teamChangedfaction = this.lateBindingFunctions.teamChangedfaction.bind(this);
             this.matchMaker.client.mapHasChanged = this.lateBindingFunctions.mapHasChanged.bind(this);
             this.matchMaker.client.startGameCountdown = this.lateBindingFunctions.startGameCountdown.bind(this);
             this.matchMaker.client.gameIsStarting = this.lateBindingFunctions.gameIsStarting.bind(this);
             this.matchMaker.client.playerIsNotReady = this.lateBindingFunctions.playerIsNotReady.bind(this);
             this.matchMaker.client.playerIsReady = this.lateBindingFunctions.playerIsReady.bind(this);
-            this.matchMaker.client.playerChangedCommander = this.lateBindingFunctions.playerChangedCommander.bind(this);
+            this.matchMaker.client.playerChangedcommander = this.lateBindingFunctions.playerChangedcommander.bind(this);
         },
         completeHandshake: function (campaign, username) {
             campaign = JSON.parse(campaign);
@@ -79,9 +79,9 @@
             makeMaster:function() {
                 this.viewModel.makeMaster.apply(this.viewModel, arguments);
             },
-            teamChangedFaction:function()
+            teamChangedfaction:function()
             {
-                this.viewModel.teamChangedFaction.apply(this.viewModel, arguments);
+                this.viewModel.teamChangedfaction.apply(this.viewModel, arguments);
             },
             mapHasChanged:function() {
                 this.viewModel.mapHasChanged.apply(this.viewModel, arguments);
@@ -98,8 +98,8 @@
             playerIsReady:function() {
                 this.viewModel.playerIsReady.apply(this.viewModel, arguments);
             }                                                                          ,
-            playerChangedCommander:function() {
-                this.viewModel.playerChangedCommander.apply(this.viewModel, arguments);
+            playerChangedcommander:function() {
+                this.viewModel.playerChangedcommander.apply(this.viewModel, arguments);
             }
         },
         models: {
@@ -110,70 +110,70 @@
                 self.teamLeader = ko.observable(false);
                 self.matchMaster = ko.observable(false);
                 self.chat = new Models.Messages();
-                self.campaign = new Models.Campaign(Models, campaignObject);
+                self.campaign = new Models.campaign(Models, campaignObject);
                 self.currentTeam = ko.observable();
             },
-            RedTeam:function(Model, team){
+            redTeam:function(Model, team){
                 var self = this;
-                self.id = team.Id;
-                self.name = ko.observable(team.Name);
-                self.faction = new Model.Faction(team.Faction);
+                self.id = team.id;
+                self.name = ko.observable(team.name);
+                self.faction = new Model.faction(team.faction);
                 self.players = ko.observableArray();
-                for (var index = 0; index < team.Players.length; index++) {
-                    var player = team.Players[index];
-                    self.players.push(new MatchMaker.models.Player(player));
+                for (var index = 0; index < team.players.length; index++) {
+                    var player = team.players[index];
+                    self.players.push(new MatchMaker.models.player(player));
                 }
             },
-            BlueTeam: function (Model, team) {
+            blueTeam: function (Model, team) {
                 var self = this;
-                self.id = team.Id;
-                self.name = ko.observable(team.Name);
-                self.faction = new Model.Faction(team.Faction);
+                self.id = team.id;
+                self.name = ko.observable(team.name);
+                self.faction = new Model.faction(team.faction);
                 self.players = ko.observableArray();
-                for (var index = 0; index < team.Players.length; index++) {
-                    var player = team.Players[index];
-                    self.players.push(new MatchMaker.models.Player(player));
+                for (var index = 0; index < team.players.length; index++) {
+                    var player = team.players[index];
+                    self.players.push(new MatchMaker.models.player(player));
                 }
             },
-            SpectatingTeam: function (team) {
+            spectatingTeam: function (team) {
                 var self = this;
-                self.id = team.Id;
-                self.name = ko.observable(team.Name);
+                self.id = team.id;
+                self.name = ko.observable(team.name);
                 self.players = ko.observableArray();
-                for (var index = 0; index < team.Players.length; index++) {
-                    var player = team.Players[index];
-                    self.players.push(new MatchMaker.models.Player(player));
+                for (var index = 0; index < team.players.length; index++) {
+                    var player = team.players[index];
+                    self.players.push(new MatchMaker.models.player(player));
                 }
             },
-            Campaign:function(Models, campaign) {
+            campaign:function(Models, campaign) {
                 var self = this;
                 var status = ["In Lobby", "In Game", "Finished"];
-                self.Id = ko.observable(campaign.Id);
-                self.url = ko.observable("/lobbies/matchmaking/" + campaign.Id);
-                self.users = ko.observable(campaign.BlueTeam.Players.length + campaign.RedTeam.Players.length + "/8");
-                self.map = ko.observable(campaign.Map);
-                self.notes = ko.observable(campaign.Notes);
+                self.id = ko.observable(campaign.id);
+                self.url = ko.observable("/lobbies/matchmaking/" + campaign.id);
+                self.users = ko.observable(campaign.blueTeam.players.length + campaign.redTeam.players.length + "/8");
+                self.map = ko.observable(campaign.map);
+                self.notes = ko.observable(campaign.notes);
                 self.status = ko.observable(status[campaign.Status]);
-                self.redTeam = new Models.RedTeam(Models, campaign.RedTeam);
-                self.blueTeam = new Models.BlueTeam(Models, campaign.BlueTeam);
-                self.spectatingTeam = new Models.SpectatingTeam(campaign.SpectatingTeam);
+                self.redTeam = new Models.redTeam(Models, campaign.redTeam);
+                self.blueTeam = new Models.blueTeam(Models, campaign.blueTeam);
+                self.spectatingTeam = new Models.spectatingTeam(campaign.spectatingTeam);
             },
-            Faction:function(faction) {
+            faction:function(faction) {
                 var self = this;
-                self.id = ko.observable(faction.Id);
-                self.name = ko.observable(faction.Name);
-                self.imgUrl = ko.observable(faction.ImgUrl);
-                self.FactionAbilities = faction.FactionAbilities;
+                self.id = ko.observable(faction.id);
+                self.name = ko.observable(faction.name);
+                self.imgUrl = ko.observable(faction.imgUrl);
+                self.factionAbilities = faction.factionAbilities;
             },
-            Player: function(player) {
+            player: function(player) {
                 var self = this;
-                self.Id = player.Id;
-                self.Username = player.Username;
+                self.id = player.id;
+                self.username = player.username;
                 debugger;
-                if (typeof player.Commander === "function") {
-                    self.Commander = ko.observable(new MatchMaker.models.Commander(player.Commander()));
+                if (typeof player.commander === "function") {
+                    self.commander = ko.observable(new MatchMaker.models.commander(player.commander()));
                 } else {
-                    self.Commander = ko.observable(new MatchMaker.models.Commander(player.Commander));
+                    self.commander = ko.observable(new MatchMaker.models.commander(player.commander));
                 }
                
                 if (typeof player.Ready === "function") {
@@ -183,11 +183,11 @@
                 debugger;
                 self.me = (player.me) ? player.me : false; //purely for display, not used by the backend to determine who the player is
             },
-            Commander: function(commander) {
+            commander: function(commander) {
                 var self = this;
-                self.Id = commander.Id;
-                self.Name = commander.Name;
-                self.ImgUrl = commander.ImgUrl;
+                self.id = commander.Id;
+                self.name = commander.name;
+                self.imgUrl = commander.imgUrl;
             },
             Messages:function() {
                 var self = this;
@@ -197,7 +197,7 @@
         }
     }
 
-    MatchMaker.models.Player.prototype = {
+    MatchMaker.models.player.prototype = {
         playerReady: function() {
             MatchMaker.matchMaker.server.playerReady();
         },
@@ -212,8 +212,8 @@
                 if (!self.commanderFn) {
                     debugger;
                     self.commanderFn = function (event) {
-                        var commanderId = parseInt(this.dataset.commanderid);
-                        self.setCommander(commanderId);
+                        var commanderid = parseInt(this.dataset.commanderid);
+                        self.setcommander(commanderid);
                     }
                     $('.commander-select').click(self.commanderFn);
                 }
@@ -223,41 +223,41 @@
             }
             $('#commanderList').modal('show');
         },
-        setCommander: function (commanderId) {
-            MatchMaker.matchMaker.server.requestCommander(commanderId);
+        setcommander: function (commanderid) {
+            MatchMaker.matchMaker.server.requestCommander(commanderid);
         }
      
     };
 
     MatchMaker.models.MatchMaker.prototype = {
-        orphanedPlayers: [],
+        orphanedplayers: [],
         playerJoined: function(playerObject, isMe) {
             playerObject = JSON.parse(playerObject);
             playerObject.me = isMe;
-            var player = new MatchMaker.models.Player(playerObject);
-            this.orphanedPlayers.push(player);
-            this.addMessage(player.Username + " joined");
+            var player = new MatchMaker.models.player(playerObject);
+            this.orphanedplayers.push(player);
+            this.addMessage(player.username + " joined");
         },
-        playerLeft: function(teamId, playerUserName) {
-            this.removeFromTeam(teamId, playerUserName);
+        playerLeft: function(teamid, playerUserName) {
+            this.removeFromTeam(teamid, playerUserName);
             this.addMessage(playerUserName + " has left.");
         },
         joinRed: function() {
-            var teamId = this.campaign.redTeam.id;
+            var teamid = this.campaign.redTeam.id;
             this.teamLeader(false);
-            this.joinTeam(teamId);
+            this.joinTeam(teamid);
         },
 
-        pickRedFaction: function() {
+        pickRedfaction: function() {
             var reloader = function() {
                 slider.reloadSlider();
                 var self = this;
                 if (!self.performTeamChangeRed) {
                     debugger;
                     self.performTeamChangeRed = function(event) {
-                        var factionId = parseInt(this.dataset.faction);
-                        var teamId = self.campaign.redTeam.id;
-                        self.setFaction(factionId, teamId);
+                        var factionid = parseInt(this.dataset.faction);
+                        var teamid = self.campaign.redTeam.id;
+                        self.setfaction(factionid, teamid);
                     }
                     $('.faction-picker').click(self.performTeamChangeRed);
                 }
@@ -267,15 +267,15 @@
             }
             $('#factionslist').modal('show');
         },
-        setFaction: function(faction, team) {
-            MatchMaker.matchMaker.server.requestUpdateFaction(faction, team);
+        setfaction: function(faction, team) {
+            MatchMaker.matchMaker.server.requestUpdatefaction(faction, team);
         },
-        playerChangedCommander: function(username, commander) {
+        playerChangedcommander: function(username, commander) {
             commander = JSON.parse(commander);
-            var player = this.getPlayer(username);
-            var commanderModel = new MatchMaker.models.Commander(commander);
-            player.Commander(commanderModel);
-            player.Commander.valueHasMutated();
+            var player = this.getplayer(username);
+            var commanderModel = new MatchMaker.models.commander(commander);
+            player.commander(commanderModel);
+            player.commander.valueHasMutated();
         },
         pickMapFn: undefined,
         pickMap: function() {
@@ -285,8 +285,8 @@
                 if (!self.pickMapFn) {
                     debugger;
                     self.pickMapFn = function(event) {
-                        var mapId = parseInt(this.dataset.mapid);
-                        self.setMap(mapId);
+                        var mapid = parseInt(this.dataset.mapid);
+                        self.setMap(mapid);
                     }
                     $('.map-select').click(self.pickMapFn);
                 }
@@ -302,14 +302,14 @@
                 MatchMaker.matchMaker.server.requestStartGameCountdown();
             }
         },
-        pickCommanderFn: undefined,
+        pickcommanderFn: undefined,
         startGameCountdown: function(time) {
             var timeInSeconds = (time / 1000);
             this.clock = setInterval(this.updateCountDown.bind(this, timeInSeconds), 1000);
             alertify.success('Game starting in ' + timeInSeconds);
         },
-        gameIsStarting: function (groupId) {
-            window.location.href = "/game/play/"+groupId; 
+        gameIsStarting: function (groupid) {
+            window.location.href = "/game/play/"+groupid; 
         },
         countDownEl: document.getElementById('countDown'),
         clock: undefined,
@@ -329,12 +329,12 @@
 
     },
         playerIsReady:function(playerName) {
-            var player = this.getPlayer(playerName);
+            var player = this.getplayer(playerName);
             player.Ready(true);
             player.valueHasMutated();
         },
         playerIsNotReady:function(playerName) {
-            var player = this.getPlayer(playerName);
+            var player = this.getplayer(playerName);
             player.Ready(false);
             player.valueHasMutated();
         },
@@ -342,36 +342,36 @@
             this.campaign.map(map);
             this.addMessage("Admin: map has changed to "+ map.Name);
         }                       ,
-        setMap:function(mapId) {
-            MatchMaker.matchMaker.server.requestMapChange(mapId);
+        setMap:function(mapid) {
+            MatchMaker.matchMaker.server.requestMapChange(mapid);
         }   ,
         renameRed: function (model, e) {
             debugger;
             alert("rename to", e.value);
         },
         joinBlue: function () {
-            var teamId = this.campaign.blueTeam.id;
+            var teamid = this.campaign.blueTeam.id;
             this.teamLeader(false);
-            this.joinTeam(teamId);
+            this.joinTeam(teamid);
         },
         joinSpectators: function () {
-            var teamId = this.campaign.spectatingTeam.id;
+            var teamid = this.campaign.spectatingTeam.id;
             this.teamLeader(false);
-            this.joinTeam(teamId);   
+            this.joinTeam(teamid);   
         },
      
         performTeamChangeBlue:undefined,
         performTeamChangeRed: undefined,
-        pickBlueFaction: function () {
+        pickBluefaction: function () {
              var reloader = function () {
                 slider.reloadSlider();
                 var self = this;
                 if (!self.performTeamChangeBlue) {
                     debugger;
                     self.performTeamChangeBlue = function(event) {
-                        var factionId = parseInt(this.dataset.faction);
-                        var teamId = self.campaign.blueTeam.id;
-                        self.setFaction(factionId, teamId);
+                        var factionid = parseInt(this.dataset.faction);
+                        var teamid = self.campaign.blueTeam.id;
+                        self.setfaction(factionid, teamid);
                     }
                     $('.faction-picker').click(self.performTeamChangeBlue);
                 }
@@ -381,13 +381,13 @@
             }        
             $('#factionslist').modal('show');
         },
-        teamChangedFaction: function (teamId, faction) {
+        teamChangedfaction: function (teamid, faction) {
             faction = JSON.parse(faction);
-            var team = this.getTeam(teamId);
-            team.faction.id = faction.Id;
-            team.faction.name(faction.Name);
-            team.faction.imgUrl(faction.ImgUrl);
-            alertify.success(team.name() + " have switched faction to " + faction.Name);
+            var team = this.getTeam(teamid);
+            team.faction.id = faction.id;
+            team.faction.name(faction.name);
+            team.faction.imgUrl(faction.imgUrl);
+            alertify.success(team.name() + " have switched faction to " + faction.name);
 
         } ,
         makeTeamLeader: function () {
@@ -440,108 +440,108 @@
             var out = document.getElementById("chat-messages");
             out.scrollTop = out.scrollHeight;
         },
-        joinTeam: function (teamId) {
-            MatchMaker.matchMaker.server.joinTeam(teamId);
+        joinTeam: function (teamid) {
+            MatchMaker.matchMaker.server.joinTeam(teamid);
         },
-        playerChangedTeam: function (currentTeamId, newTeamId, playerName) {
+        playerChangedTeam: function (currentTeamid, newTeamid, playerName) {
             debugger;
             var changeTeamName = false;
             if (playerName === MatchMaker.playerUsername) {
                 changeTeamName = true;
             }
-            var player = this.removeFromTeam(currentTeamId, playerName); //find player and remove from current team/list
+            var player = this.removeFromTeam(currentTeamid, playerName); //find player and remove from current team/list
 
-            var team = this.addToTeam(newTeamId, player, changeTeamName); //find team and add player to that list
+            var team = this.addToTeam(newTeamid, player, changeTeamName); //find team and add player to that list
             this.addMessage("Admin: " + playerName + " joined " + team.name());
         },
-        getTeam:function(teamId) {
+        getTeam:function(teamid) {
             var team = undefined;
-            if (this.campaign.blueTeam.id === teamId) {
+            if (this.campaign.blueTeam.id === teamid) {
                 team = this.campaign.blueTeam;
             }
-            if (this.campaign.redTeam.id === teamId) {
+            if (this.campaign.redTeam.id === teamid) {
                 team = this.campaign.redTeam;
             }
-            if (this.campaign.spectatingTeam.id === teamId) {
+            if (this.campaign.spectatingTeam.id === teamid) {
                 team = this.campaign.spectatingTeam;
             }
             return team;
         },
-        getPlayer:function(playerName) {
+        getplayer:function(playerName) {
             var player = undefined;
             debugger;
             var blueTeam = this.campaign.blueTeam;
             var redTeam = this.campaign.redTeam;
             var spectators = this.campaign.spectatingTeam;
-            var bluePlayerCount = blueTeam.players();
-            for (var index = 0; index < bluePlayerCount.length; index++) {
-                var bluePlayer = bluePlayerCount[index];
-                if (bluePlayer.Username === playerName) {
-                    player = bluePlayer;
+            var blueplayerCount = blueTeam.players();
+            for (var index = 0; index < blueplayerCount.length; index++) {
+                var blueplayer = blueplayerCount[index];
+                if (blueplayer.Username === playerName) {
+                    player = blueplayer;
                 }
             }
             if (!player) {
-                var redPlayerCount = redTeam.players();
-                for (var index = 0; index < redPlayerCount.length; index++) {
-                    var redPlayer = redPlayerCount[index];
-                    if (redPlayer.Username === playerName) {
-                        player = redPlayer;
+                var redplayerCount = redTeam.players();
+                for (var index = 0; index < redplayerCount.length; index++) {
+                    var redplayer = redplayerCount[index];
+                    if (redplayer.Username === playerName) {
+                        player = redplayer;
                     }
                 }
             }         
             if (!player) {
                 var spectatorCount = spectators.players();
                 for (var index = 0; index < spectatorCount.length; index++) {
-                    var specPlayer = spectatorCount[index];
-                    if (specPlayer.Username === playerName) {
-                        player = specPlayer;
+                    var specplayer = spectatorCount[index];
+                    if (specplayer.Username === playerName) {
+                        player = specplayer;
                     }
                 }
             }
             if (!player) {
-                var orphans = this.orphanedPlayers;
+                var orphans = this.orphanedplayers;
                 for (var index = 0; index < orphans.length; index++) {
-                    var orphanPlayer = orphans[index];
-                    if (orphanPlayer.Username === playerName) {
-                        player = orphanPlayer;
+                    var orphanplayer = orphans[index];
+                    if (orphanplayer.Username === playerName) {
+                        player = orphanplayer;
                     }
                 }
             }
             return player;
 
         },
-        removeFromTeam: function (teamId, playerName) {
+        removeFromTeam: function (teamid, playerName) {
             var blueTeam = this.campaign.blueTeam;
             var redTeam = this.campaign.redTeam;
             var spectators = this.campaign.spectatingTeam;     
             var playerObject = undefined;
 
-            if (blueTeam.id === teamId) {
-                var bluePlayers = blueTeam.players().length;
-                for (var i = 0; i < bluePlayers; i++) {
-                    var blueTeamPlayer = blueTeam.players()[i];
-                    if (blueTeamPlayer.Username === playerName) {
+            if (blueTeam.id === teamid) {
+                var blueplayers = blueTeam.players().length;
+                for (var i = 0; i < blueplayers; i++) {
+                    var blueTeamplayer = blueTeam.players()[i];
+                    if (blueTeamplayer.Username === playerName) {
                         playerObject = blueTeam.players().splice(i, 1)[0];
                         blueTeam.players.valueHasMutated();
                         break;
                     }
                 }
-            } else if (redTeam.id === teamId) {
-                var redPlayers = redTeam.players().length;
-                for (var i = 0; i < redPlayers; i++) {
-                    var redTeamPlayer = redTeam.players()[i];
-                    if (redTeamPlayer.Username === playerName) {
+            } else if (redTeam.id === teamid) {
+                var redplayers = redTeam.players().length;
+                for (var i = 0; i < redplayers; i++) {
+                    var redTeamplayer = redTeam.players()[i];
+                    if (redTeamplayer.Username === playerName) {
                         playerObject = redTeam.players().splice(i, 1)[0];
                         redTeam.players.valueHasMutated();
                         break;
                     }
                 }
-            } else if (spectators.id === teamId) {
-                var specPlayers = spectators.players().length;
-                for (var i = 0; i < specPlayers; i++) {
+            } else if (spectators.id === teamid) {
+                var specplayers = spectators.players().length;
+                for (var i = 0; i < specplayers; i++) {
 
                     var player = spectators.players()[i];
-                    if (player.Username === playerName) {
+                    if (player.username === playerName) {
                         playerObject = spectators.players().splice(i, 1)[0];
                         spectators.players.valueHasMutated();
                         break;
@@ -550,36 +550,36 @@
             } else {
                 
                 //check orphaned players list
-                for (var j = 0; j < this.orphanedPlayers.length; j++) {
-                    var player = this.orphanedPlayers[j];
-                    if (player.Username === playerName) {
-                        playerObject = this.orphanedPlayers.splice(j, 1)[0];
+                for (var j = 0; j < this.orphanedplayers.length; j++) {
+                    var player = this.orphanedplayers[j];
+                    if (player.username === playerName) {
+                        playerObject = this.orphanedplayers.splice(j, 1)[0];
                         break;
                     }
                 }
             }
             return playerObject;
         },
-        addToTeam:function(teamId, player, changeTeamName) {
+        addToTeam:function(teamid, player, changeTeamName) {
             var blueTeam = this.campaign.blueTeam;
             var redTeam = this.campaign.redTeam;
             var spectators = this.campaign.spectatingTeam;
-            var playerObject = new MatchMaker.models.Player(player);
-            if (blueTeam.id === teamId) {
+            var playerObject = new MatchMaker.models.player(player);
+            if (blueTeam.id === teamid) {
                 blueTeam.players.push(playerObject);
                 if (changeTeamName) {
                     MatchMaker.viewModel.teamName(blueTeam.name());
                 }
                 return blueTeam;
-            } else if (redTeam.id === teamId) {
+            } else if (redTeam.id === teamid) {
                 redTeam.players.push(playerObject);
                 if (changeTeamName) {
                     MatchMaker.viewModel.teamName(redTeam.name());
                 }
                 return redTeam;
 
-            } else if (spectators.id === teamId) {
-                var spectatingPlayers = spectators.players();
+            } else if (spectators.id === teamid) {
+                var spectatingplayers = spectators.players();
                 spectators.players.push(playerObject);
                 if (changeTeamName) {
                     MatchMaker.viewModel.teamName(spectators.name());
