@@ -236,13 +236,13 @@ namespace EDWars.Migrations
             DropForeignKey("dbo.Campaigns", "mapId", "dbo.Maps");
             DropForeignKey("dbo.Campaigns", "BlueTeamId", "dbo.Teams");
             DropForeignKey("dbo.players", "Team_Id", "dbo.Teams");
-            DropForeignKey("dbo.players", "CommanderId", "dbo.Commanders");
-            DropForeignKey("dbo.abilities", "CommanderId", "dbo.Commanders");
+            DropForeignKey("dbo.players", "commanderId", "dbo.Commanders");
+            DropForeignKey("dbo.abilities", "commanderId", "dbo.Commanders");
             DropForeignKey("dbo.Teams", "FactionId", "dbo.Factions");
             DropForeignKey("dbo.factionAbilities", "FactionId", "dbo.Factions");
-            DropIndex("dbo.abilities", new[] { "CommanderId" });
+            DropIndex("dbo.abilities", new[] { "commanderId" });
             DropIndex("dbo.players", new[] { "Team_Id" });
-            DropIndex("dbo.players", new[] { "CommanderId" });
+            DropIndex("dbo.players", new[] { "commanderId" });
             DropIndex("dbo.factionAbilities", new[] { "FactionId" });
             DropIndex("dbo.Teams", new[] { "FactionId" });
             DropIndex("dbo.Campaigns", new[] { "SpectatingTeamId" });

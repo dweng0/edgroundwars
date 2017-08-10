@@ -39,7 +39,6 @@ namespace EDWars.Models
         public int id { get; set; }
 
         [ForeignKey("MapId")]
-        public int MapId { get; set; }
         public virtual Map map{ get; set; }
 
         public int mass { get; set; }
@@ -159,8 +158,11 @@ namespace EDWars.Models
     {
         [Key]
         public int id { get; set; }
-        public int CommanderId { get; set; }
+
+        [ForeignKey("commander.id")]
+        public int commanderid { get; set; }
         public virtual Commander Commander { get; set; }
+
         public int levelAvailable { get; set; }
         public int damageOverTimeTick { get; set; } //the time it takes for the next damage tick to occur
         public int damagePerTick { get; set; } //how much damage does this ability do per tick if any
@@ -264,7 +266,7 @@ namespace EDWars.Models
 
         public int? CommanderId { get; set;}
 
-        [ForeignKey("CommanderId")]
+        [ForeignKey("commanderid")]
         public virtual Commander commander { get; set; }
         
         public bool Ready { get; set; }
