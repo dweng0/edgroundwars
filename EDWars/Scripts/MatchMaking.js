@@ -4,21 +4,24 @@
         matchMaker: $.connection.matchMaking,
         gameid: undefined,
         viewModel: undefined,
-        playerUsername: undefined,
+        playerusername: undefined,
         teamName: undefined,
         init: function() {
             $.connection.hub.logging = true;
-            $.connection.hub.start().done(this.connected.bind(this));
             this.sendSetup();
+            $.connection.hub.start().done(this.connected.bind(this));
+        },
+
+        getPathName: function() {
             var pathName = window.location.pathname;
             var lastChar = pathName.substr(pathName.length - 1);
             if (lastChar === "/") {
                 pathName = pathName.substr(0, pathName.length - 1);
             }
-            this.sendSetup();
-            pathName = pathName.substr(pathName.lastIndexOf('/') + 1);
-            this.gameid = pathName;
+
+            return pathName.substr(pathName.lastIndexOf('/') + 1);
         },
+
         connected: function() {
             
            
@@ -27,7 +30,8 @@
                 console.log(e);
             });
         },
-        sendSetup: function() {
+        sendSetup: function () {
+            this.gameid = this.getPathName();
             this.matchMaker.client.Addcampaign = this.completeHandshake.bind(this);
             this.matchMaker.client.warning = function(message) {
                 alertify.warning(message);
@@ -53,7 +57,7 @@
         completeHandshake: function (campaign, username) {
             campaign = JSON.parse(campaign);
                        debugger
-            this.playerUsername = username;
+            this.playerusername = username;
             this.viewModel = new this.models.MatchMaker(this.models, campaign);
             ko.applyBindings(this.viewModel);
             document.getElementById('joinSpectators').addEventListener("click", this.viewModel.joinSpectators.bind(this.viewModel));
@@ -167,7 +171,7 @@
             },
             player: function(player) {
                 var self = this;
-                self.id = player.id;
+                self.id = player.Id || player.id;
                 self.username = player.username;
                 debugger;
                 if (typeof player.commander === "function") {
@@ -238,9 +242,9 @@
             this.orphanedplayers.push(player);
             this.addMessage(player.username + " joined");
         },
-        playerLeft: function(teamid, playerUserName) {
-            this.removeFromTeam(teamid, playerUserName);
-            this.addMessage(playerUserName + " has left.");
+        playerLeft: function(teamid, playerusername) {
+            this.removeFromTeam(teamid, playerusername);
+            this.addMessage(playerusername + " has left.");
         },
         joinRed: function() {
             var teamid = this.campaign.redTeam.id;
@@ -446,7 +450,7 @@
         playerChangedTeam: function (currentTeamid, newTeamid, playerName) {
             debugger;
             var changeTeamName = false;
-            if (playerName === MatchMaker.playerUsername) {
+            if (playerName === MatchMaker.playerusername) {
                 changeTeamName = true;
             }
             var player = this.removeFromTeam(currentTeamid, playerName); //find player and remove from current team/list
@@ -476,7 +480,7 @@
             var blueplayerCount = blueTeam.players();
             for (var index = 0; index < blueplayerCount.length; index++) {
                 var blueplayer = blueplayerCount[index];
-                if (blueplayer.Username === playerName) {
+                if (blueplayer.username === playerName) {
                     player = blueplayer;
                 }
             }
@@ -484,7 +488,7 @@
                 var redplayerCount = redTeam.players();
                 for (var index = 0; index < redplayerCount.length; index++) {
                     var redplayer = redplayerCount[index];
-                    if (redplayer.Username === playerName) {
+                    if (redplayer.username === playerName) {
                         player = redplayer;
                     }
                 }
@@ -493,7 +497,7 @@
                 var spectatorCount = spectators.players();
                 for (var index = 0; index < spectatorCount.length; index++) {
                     var specplayer = spectatorCount[index];
-                    if (specplayer.Username === playerName) {
+                    if (specplayer.username === playerName) {
                         player = specplayer;
                     }
                 }
@@ -502,7 +506,7 @@
                 var orphans = this.orphanedplayers;
                 for (var index = 0; index < orphans.length; index++) {
                     var orphanplayer = orphans[index];
-                    if (orphanplayer.Username === playerName) {
+                    if (orphanplayer.username === playerName) {
                         player = orphanplayer;
                     }
                 }
@@ -520,7 +524,7 @@
                 var blueplayers = blueTeam.players().length;
                 for (var i = 0; i < blueplayers; i++) {
                     var blueTeamplayer = blueTeam.players()[i];
-                    if (blueTeamplayer.Username === playerName) {
+                    if (blueTeamplayer.username === playerName) {
                         playerObject = blueTeam.players().splice(i, 1)[0];
                         blueTeam.players.valueHasMutated();
                         break;
@@ -530,7 +534,7 @@
                 var redplayers = redTeam.players().length;
                 for (var i = 0; i < redplayers; i++) {
                     var redTeamplayer = redTeam.players()[i];
-                    if (redTeamplayer.Username === playerName) {
+                    if (redTeamplayer.username === playerName) {
                         playerObject = redTeam.players().splice(i, 1)[0];
                         redTeam.players.valueHasMutated();
                         break;
