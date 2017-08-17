@@ -5,18 +5,36 @@
     Layout = "~/Views/Shared/_GameLayout.cshtml";
 }
 <div class="canvas-holder" style="text-align: center;">
-    <canvas id="rendercanvas" style="width: 1024px; height: 758px; margin-left: auto; margin-right: auto;"></canvas>    
+    <canvas id="renderCanvas"></canvas>
+    <script type="text/javascript" src="~/Scripts/wildflower/static/bundle.js"></script>
 </div>
 
 @section scripts{
+<script src="~/Scripts/wildflower/vendors/oimo.js"></script>
+<script src="~/Scripts/wildflower/vendors/babylon.js"></script>
 <script src="~/Scripts/jquery.signalR-2.2.0.js"></script>
 <script src="~/SignalR/hubs"></script>
-<script>
-    $(document).ready(function() {
-        System.import('GameInstanceManager').then(function(moduleLoader) {
-            return new moduleLoader.GameInstanceInstanceManager(@Model.id);
-        });
+    <script>
+    var game = new Game(@Model.id , 'renderCanvas');
+    $(document).ready(function () {
+        debugger;
+        game.start();
     });
-</script>
- 
+    document.body.addEventListener("mousedown", function(e) {
+        console.log("CLICK");
+        game.input.onMouseInput(e);
+    }),
+        document.body.addEventListener("mousemove", function(e) {
+            if (e.which === 1) {
+                game.input.onMouseInput(e);
+            }
+        });
+    window.addEventListener("keydown", function (e) {
+        game.input.onKeyboardInput(e);
+    });
+    window.addEventListener("wheel", function(e) {
+        game.input.onMouseScroll(e);
+    });
+    </script>
+
 }

@@ -12,12 +12,17 @@ namespace EDWars
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
+            routes.MapRoute(
+                 name: "gameRoutes",
+                 url: "game/{objectType}/{objectId}/{resource}/{resourceId}",
+                 defaults: new { controller = "Game", action = "Assets", objectType = UrlParameter.Optional, objectId = UrlParameter.Optional, resource = UrlParameter.Optional, resourceId = UrlParameter.Optional}
+             );
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
         }
     }
 }

@@ -24,6 +24,44 @@ namespace EDWars.Controllers
             return View(campaign);
         }
 
+        public ActionResult Manifest(int? Id)
+        {
+            if (Id == null)
+            {
+                return HttpNotFound();
+            }
+
+
+        
+
+           
+            return Json(manifest, JsonRequestBehavior.AllowGet);
+
+        }
+        //      url: "game/{objectType}/{objectId}/{resource}/{resourceId}",
+
+        public ActionResult Assets(string obejctType, string objectId, string resource, string resourceId)
+        {
+            Response.Headers.Add("Content-type", "application/json");
+            switch (obejctType)
+            {
+                case "manifest":
+                {
+                    var manifest = new UrlManifest();
+                    manifest.baseUrl = "../assets";
+
+                    return Json(manifest, JsonRequestBehavior.AllowGet);
+                }
+                case "campaign":
+                {
+                    var IdAsInt = Convert.ToInt32(objectId);
+                    return Json(GetCampaignJson(db.Campaigns.Find(IdAsInt)), JsonRequestBehavior.AllowGet);
+                }
+            }
+            
+            return HttpNotFound();
+        }
+
         public ActionResult Campaign(int? Id)
         {
             if (Id == null)
@@ -51,6 +89,8 @@ namespace EDWars.Controllers
            });
             return jsonCampaign;
         }
+
+        
 
     }
 }
