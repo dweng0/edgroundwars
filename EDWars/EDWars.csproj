@@ -259,6 +259,26 @@
     <Compile Include="Migrations\201708101539572_thebigshort.Designer.cs">
       <DependentUpon>201708101539572_thebigshort.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201708171316357_beef2.cs" />
+    <Compile Include="Migrations\201708171316357_beef2.Designer.cs">
+      <DependentUpon>201708171316357_beef2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708171414551_teeth.cs" />
+    <Compile Include="Migrations\201708171414551_teeth.Designer.cs">
+      <DependentUpon>201708171414551_teeth.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708171416244_teeth2.cs" />
+    <Compile Include="Migrations\201708171416244_teeth2.Designer.cs">
+      <DependentUpon>201708171416244_teeth2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708171434248_teeth3.cs" />
+    <Compile Include="Migrations\201708171434248_teeth3.Designer.cs">
+      <DependentUpon>201708171434248_teeth3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708171435505_teeth4.cs" />
+    <Compile Include="Migrations\201708171435505_teeth4.Designer.cs">
+      <DependentUpon>201708171435505_teeth4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Campaign.cs" />
@@ -272,8 +292,29 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="assets\commanders\izella\meshes\CANNON_DM.png" />
+    <Content Include="assets\commanders\izella\meshes\CANNON_NM.png" />
+    <Content Include="assets\commanders\izella\meshes\CANNON_SM.png" />
+    <Content Include="assets\commanders\izella\meshes\cityStreets_thumb.jpg" />
+    <Content Include="assets\commanders\izella\meshes\DMM08_BODY_DESERT_DM.png" />
+    <Content Include="assets\commanders\izella\meshes\DMM08_BODY_LM.png" />
+    <Content Include="assets\commanders\izella\meshes\DMM08_BODY_NM.png" />
+    <Content Include="assets\commanders\izella\meshes\DMM08_BODY_SM.png" />
+    <Content Include="assets\commanders\izella\meshes\ground_shadow.jpg" />
+    <Content Include="assets\commanders\izella\meshes\headlights.png" />
+    <Content Include="assets\commanders\izella\meshes\REMOT_DM.png" />
+    <Content Include="assets\commanders\izella\meshes\RODA_dm.png" />
+    <Content Include="assets\commanders\izella\meshes\RODA_NM.png" />
+    <Content Include="assets\commanders\izella\meshes\RODA_SM.png" />
     <Content Include="assets\commanders\izella\texture.jpg" />
+    <Content Include="assets\commanders\izella\textures\texture.jpg" />
+    <Content Include="assets\commanders\r\meshes\t0157_0.bmp" />
+    <Content Include="assets\commanders\r\meshes\t0157_1.bmp" />
+    <Content Include="assets\commanders\r\meshes\t0157_2.bmp" />
+    <Content Include="assets\commanders\r\meshes\t0231_0.256x256.jpg" />
+    <Content Include="assets\commanders\r\meshes\t0231_0.png" />
     <Content Include="assets\commanders\r\texture.jpg" />
+    <Content Include="assets\commanders\r\textures\texture.jpg" />
     <Content Include="assets\maps\stargazer\ground.jpg" />
     <Content Include="assets\maps\stargazer\heightMap.png" />
     <Content Include="assets\maps\stargazer\oldheightMap.png" />
@@ -373,6 +414,8 @@
     <Content Include="fonts\Simple-Line-Icons.eot" />
     <Content Include="fonts\Simple-Line-Icons.ttf" />
     <Content Include="fonts\Simple-Line-Icons.woff" />
+    <Content Include="assets\commanders\izella\meshes\buggy.babylon" />
+    <Content Include="assets\commanders\r\meshes\buggy.babylon" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -517,9 +560,9 @@
     <Content Include="Scripts\underscore.js" />
     <Content Include="Scripts\underscore.min.js" />
     <Content Include="Scripts\waypoints.min.js" />
+    <Content Include="Scripts\wildflower\static\bundle.js" />
     <Content Include="Scripts\wow.min.js" />
     <Content Include="Views\Game\index.html" />
-    <Content Include="Scripts\wildflower\static\bundle.js" />
     <Content Include="Scripts\wildflower\vendors\babylon.js" />
     <Content Include="Scripts\wildflower\vendors\oimo.js" />
     <Content Include="Views\Lobbies\Index.cshtml" />
@@ -598,6 +641,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201708101539572_thebigshort.resx">
       <DependentUpon>201708101539572_thebigshort.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708171316357_beef2.resx">
+      <DependentUpon>201708171316357_beef2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708171414551_teeth.resx">
+      <DependentUpon>201708171414551_teeth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708171416244_teeth2.resx">
+      <DependentUpon>201708171416244_teeth2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708171434248_teeth3.resx">
+      <DependentUpon>201708171434248_teeth3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708171435505_teeth4.resx">
+      <DependentUpon>201708171435505_teeth4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

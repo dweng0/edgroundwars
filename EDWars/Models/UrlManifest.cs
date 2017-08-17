@@ -7,6 +7,11 @@ namespace EDWars.Models
 
     public class MapManifest
     {
+        public MapManifest()
+        {
+            physics = new MapPhysics();
+        }
+
         public int Id { get; set; }
         public string  baseUrl { get; set; }
         public string texture { get; set; }
@@ -30,6 +35,12 @@ namespace EDWars.Models
 
     public class UrlManifest
     {
+        public UrlManifest()
+        {
+            this.map = new MapManifest();
+            this.world = new WorldPhysics();
+        }
+
         public int Id { get; set; }
         public string playerUsername { get; set; }
         public string baseUrl { get; set; }

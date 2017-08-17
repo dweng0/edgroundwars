@@ -256,7 +256,6 @@ var Game = (function () {
     Game.prototype.onBeginLoadGameData = function (manifest) {
         var _this = this;
         console.log('loading game data');
-        debugger;
         this.onLoadGameData(manifest)
             .then(function (campaign) {
             _this.onLoadBabylon(manifest, campaign);
@@ -270,7 +269,6 @@ var Game = (function () {
         if (this.onBeforeLoadGameData) {
             this.onBeforeLoadGameData();
         }
-        debugger;
         return this._statisticsHandler.loadCampaign(manifest, this._campaignId);
     };
     /**
@@ -525,9 +523,9 @@ var AssetsManager = (function () {
         });
     };
     AssetsManager.prototype.loadCharacter = function (url, commander, manifest, startingVector) {
-        var bodyTextureUrl = url + commander.assetsUrl + "/textures" + manifest.textureUrl;
+        var bodyTextureUrl = url + commander.assetsUrl + "/textures/" + manifest.textureUrl;
         var meshUrl = url + commander.assetsUrl + manifest.meshUrl;
-        var meshTask = this._assets.addMeshTask("skull task", "", meshUrl, manifest.meshes[0]);
+        var meshTask = this._assets.addMeshTask("skull task", "", meshUrl, "buggy.babylon");
         meshTask.onSuccess = function (task) {
             // http://www.html5gamedevs.com/topic/6732-question-about-mesh-impostor/
             var mesh = BABYLON.Mesh.MergeMeshes(task.loadedMeshes);
@@ -590,7 +588,7 @@ var AssetsManager = (function () {
         skybox.material = skyboxMaterial;
         skyboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
         skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
-        skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture(url + "/skybox" + manifest.map.skybox, scene);
+        skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture(url + "/skybox" + manifest.map.skyBox, scene);
         skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
         skybox.renderingGroupId = 0;
         this._campaign.map.skyMesh = skybox;
@@ -603,7 +601,7 @@ var AssetsManager = (function () {
         skybox.material = skyboxMaterial;
         skyboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
         skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
-        skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture(url + "/skybox" + manifest.map.skybox, scene);
+        skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture(url + "/skybox" + manifest.map.skyBox, scene);
         skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
         skybox.renderingGroupId = 0;
         this._campaign.map.skyMesh = skybox;
@@ -1184,7 +1182,6 @@ var Interface = (function () {
             throw new Error("No manifest url found. Handshake with server is requried");
         }
         this.fetch(this._manifestUrl, function (data) {
-            debugger;
             _this.manifest = JSON.parse(data.entity);
             callback(_this.manifest);
         }, function (err) {
@@ -1610,14 +1607,12 @@ var Input = (function () {
         if (this._scene && !this.isNotReady()) {
             var pickResult = this._scene.pick(this._scene.pointerX, this._scene.pointerY);
             if (pickResult.hit) {
-                debugger;
                 this._stream.movePlayerRequest(this._character.playerId, pickResult.pickedPoint);
                 //  this._character.moveByMouse(pickResult.pickedPoint);
             }
         }
     };
     Input.prototype.onMouseScroll = function (event) {
-        debugger;
         if (event.wheelDelta / 120 > 0) {
             this._character.zoomIn();
         }

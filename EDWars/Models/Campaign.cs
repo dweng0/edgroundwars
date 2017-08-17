@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.AccessControl;
 using System.Web.Configuration;
+using System.Web.Script.Serialization;
 using Microsoft.Ajax.Utilities;
 
 namespace EDWars.Models
@@ -38,9 +40,18 @@ namespace EDWars.Models
         [Key]
         public int Id { get; set; }
 
-        public int mass { get; set; }
-        public int restitution { get; set; }
-        public int friction { get; set; }
+        public double mass { get; set; }
+        public double restitution { get; set; }
+        public double friction { get; set; }
+    }
+
+    public class CharacterPhysics
+    {
+        public int Id { get; set; }
+
+        public double mass { get; set; }
+        public double restitution { get; set; }
+        public double friction { get; set; }
     }
 
     public class Map
@@ -78,15 +89,16 @@ namespace EDWars.Models
     {   
         public int id { get; set; }
         public string name { get; set; }
+        public int level { get; set; }
         public virtual List<Player> players { get; set; }
         public int? FactionId { get; set; }
-
         [ForeignKey("FactionId")]
         public virtual Faction faction { get; set; }
         public Team()
         {
             players = new List<Player>();
             name = "Mostly Harmless Team";
+            level = 0;
         }
     }
 
@@ -117,6 +129,22 @@ namespace EDWars.Models
             }
         }
 
+    }
+
+    public class CharacterData
+    {
+        public CharacterData()
+        {
+            this.physics = new CharacterPhysics();
+        }
+        public int Id { get; set; }
+        public int height { get; set; }
+        public int width { get; set; }
+        public string textureUrl { get; set; }
+        public int number { get; set; }
+        public string meshUrl { get; set; }
+        public CharacterPhysics physics { get; set; }
+        public string[] meshes{ get; set; }
     }
 
 
@@ -165,8 +193,9 @@ namespace EDWars.Models
         public StackDepletesOn stackDepletesOn { get; set; }
 
         public int CommanderId { get; set; }
+        [ScriptIgnore]
         [ForeignKey("CommanderId")]
-        public virtual Commander Commander { get; set; }
+        public Commander Commander { get; set; }
     }
 
     public class Game
@@ -251,9 +280,22 @@ namespace EDWars.Models
         public int Id { get; set; }
 
         public int FactionId { get; set; }
-        public virtual Faction Faction { get; set; }
+        [ScriptIgnore]
+        public Faction Faction { get; set; }
 
 
+    }
+
+    public class PlayerStats
+    {
+        public int Id { get; set; }
+        public int deaths { get; set; }
+        public int Kills { get; set; }
+        public int experience { get; set; }
+        public int gold { get; set; }
+        public int damageDealt { get; set; }
+        public int healingDealt { get; set; }
+        public int healingReceived { get; set; }
     }
 
 
@@ -261,7 +303,7 @@ namespace EDWars.Models
     {
         [Key]
         public int id { get; set; }
-
+        public PlayerStats stats { get; set; }
         public int? CommanderId { get; set;}
 
         [ForeignKey("CommanderId")]

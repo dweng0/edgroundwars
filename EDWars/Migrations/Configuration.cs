@@ -32,12 +32,15 @@ namespace EDWars.Migrations
                 new FactionAbility { Id = 5, name = "Productive Punishment", taskBarBadgeUrl = "/images/graphics/abilities/faction/federation/punishment.png", aggressive = false, defensive = true, areaOfEffectRadius = 0, isPassive = true, duration = 0, isAPercentage = true, experience = 4, stacks = false, targeting = Targeting.passiveOnSelf, FactionId = 2, description = "Always looking for ways to corner the market... Any market, you gain an additional 4% experience killing enemies." },
                 new FactionAbility { Id = 6, name = "Greed", taskBarBadgeUrl = "/images/graphics/abilities/faction/federation/greed.png", aggressive = false, defensive = true, areaOfEffectRadius = 0, isPassive = true, duration = 0, isAPercentage = true, money = 2, stacks = true, targeting = Targeting.passiveOnSelf, FactionId = 2, description = "Dishing out punishment should never affect profits, you gain a 2% increase to money gained from kills, this increases with more members around" }
                 );
-
+            context.CharacterDatas.AddOrUpdate(
+                new CharacterData { Id = 1, height = 20, textureUrl = "texture.jpg", meshUrl = "/meshes/", meshes =  new string[] {"buggy.babylon"}, width = 20, physics = new CharacterPhysics {friction = 0.8, restitution = 0.2, mass = 1, Id= 1}},
+                new CharacterData { Id = 2, height = 20, textureUrl = "texture.jpg", meshUrl = "/meshes/", meshes =   new string[] {"buggy.babylon"}, width = 20, physics = new CharacterPhysics {friction = 0.8, restitution = 0.2, mass = 1, Id= 2}}
+                );
             context.Commanders.AddOrUpdate(
                 new Commander
                 {
                     Id = 1,
-                    assetsUrl = "r/",
+                    assetsUrl = "/r",
                     name = "R",
                     description = "A true commander",
                     baseAgility = 1,
@@ -57,7 +60,7 @@ namespace EDWars.Migrations
                 new Commander
                 {
                     Id = 2,
-                    assetsUrl = "izella/",
+                    assetsUrl = "/izella",
                     name = "Izella",
                     description = "Needs a swanky description",
                     baseAgility = 3,
@@ -77,7 +80,7 @@ namespace EDWars.Migrations
 
                 );
             context.Maps.AddOrUpdate(
-                new Map { id = 1, redStartingPointX = -30, redStartingPointY  = 9, redStartingPointZ = -108,  blueStartingPointX  = -79, blueStartingPointY = 13, blueStartingPointZ = 94, description = "A planet on the edge of civilized space, packed with enough resources to start the next expedition. Factions have been posturing for control, now they have sent in their best commanders ", imageUrl = "/images/maps/stargazer.jpg", maxPlayers = 8, name = "Star Gazer", timesPicked = 0, assetUrl = "stargazer/"},
+                new Map { id = 1, redStartingPointX = -30, redStartingPointY  = 9, redStartingPointZ = -108,  blueStartingPointX  = -79, blueStartingPointY = 13, blueStartingPointZ = 94, description = "A planet on the edge of civilized space, packed with enough resources to start the next expedition. Factions have been posturing for control, now they have sent in their best commanders ", imageUrl = "/images/maps/stargazer.jpg", maxPlayers = 8, name = "stargazer", timesPicked = 0, assetUrl = "stargazer/"},
                 new Map { id = 2, description = "[COMING SOON] - The sensitive payload on this shipwreck has got all factions scrambling to recover it.", imageUrl = "/images/maps/shipwreck.png", maxPlayers = 8, name = "Shipwreck", timesPicked = 0 }
                 );
 
