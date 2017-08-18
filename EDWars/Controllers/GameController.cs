@@ -30,6 +30,7 @@ namespace EDWars.Controllers
         public ActionResult Assets(string objectType, string objectId, string resource, string resourceId)
         {
             Response.Headers.Add("Content-type", "application/json");
+
             switch (objectType.ToLower())
             {
                 case "map":
@@ -58,6 +59,7 @@ namespace EDWars.Controllers
                     manifest.map.physics.friction = 0.5;
                     manifest.map.physics.mass = 0;
                     manifest.map.physics.restitution = 0.8;
+                    manifest.playerUsername = this.User.Identity.Name;
 
                     //todo fetch from a manifest db
 
@@ -88,6 +90,11 @@ namespace EDWars.Controllers
                         var path = dir + "/skybox/" + resourceId; //validate the path for security or use other means to generate the path.
                         return File(path, "image/jpeg");
                     }
+                    case "texture":
+                    {
+                        var path = dir + "/" + resourceId; //validate the path for security or use other means to generate the path.
+                        return File(path, "image/jpeg");
+                    }
                    
                 }
 
@@ -112,10 +119,22 @@ namespace EDWars.Controllers
                             return Json(db.CharacterDatas.Find(character.Id), JsonRequestBehavior.AllowGet);
                         }
                     case "meshes":
+                    {
+                        //ignore the manifest
+                        var dotSeperated = resourceId.Split('.').Last();
+                        if (dotSeperated == "manifest")
                         {
-                            var path = dir + "/meshes/" + resourceId; //validate the path for security or use other means to generate the path.
-                            return File(path, "application/babylon");
+                            return HttpNotFound();
                         }
+
+                        var path = dir + "/meshes/" + resourceId; //validate the path for security or use other means to generate the path.
+                        return File(path, "application/babylon");
+                    }
+                    case "texture":
+                    {
+                        var path = dir + "/textures/" + resourceId; //validate the path for security or use other means to generate the path.
+                        return File(path, "image/jpeg");
+                    }
                 }
             }
             return Json(character, JsonRequestBehavior.AllowGet);

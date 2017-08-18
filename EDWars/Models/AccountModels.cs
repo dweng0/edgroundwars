@@ -28,6 +28,7 @@ namespace EDWars.Models
         public DbSet<FactionAbility> FactionAbilities { get; set; }
         public DbSet<Game> Game { get; set; }
         public DbSet<Map> Maps { get; set; }
+        public DbSet<MapPhysics> MapPhysics{ get; set; }
 
     }
 

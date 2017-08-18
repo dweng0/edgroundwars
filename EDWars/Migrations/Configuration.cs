@@ -80,10 +80,15 @@ namespace EDWars.Migrations
 
                 );
             context.Maps.AddOrUpdate(
-                new Map { id = 1, redStartingPointX = -30, redStartingPointY  = 9, redStartingPointZ = -108,  blueStartingPointX  = -79, blueStartingPointY = 13, blueStartingPointZ = 94, description = "A planet on the edge of civilized space, packed with enough resources to start the next expedition. Factions have been posturing for control, now they have sent in their best commanders ", imageUrl = "/images/maps/stargazer.jpg", maxPlayers = 8, name = "stargazer", timesPicked = 0, assetUrl = "stargazer/"},
+                new Map { id = 1, width = 500, height = 500, redStartingPointX = -30, redStartingPointY  = 9, redStartingPointZ = -108,  blueStartingPointX  = -79, blueStartingPointY = 13, blueStartingPointZ = 94, description = "A planet on the edge of civilized space, packed with enough resources to start the next expedition. Factions have been posturing for control, now they have sent in their best commanders ", imageUrl = "/images/maps/stargazer.jpg", maxPlayers = 8, name = "stargazer", timesPicked = 0, assetUrl = "stargazer/", MapPhysicsId = 1},
                 new Map { id = 2, description = "[COMING SOON] - The sensitive payload on this shipwreck has got all factions scrambling to recover it.", imageUrl = "/images/maps/shipwreck.png", maxPlayers = 8, name = "Shipwreck", timesPicked = 0 }
                 );
 
+            context.MapPhysics.AddOrUpdate(
+                    new MapPhysics { Id= 1, friction = 0.8, restitution = 0.2, mass = 0}
+                );
+
+           
             context.CommanderAbilities.AddOrUpdate(
                 new CommanderAbility { Id = 1, levelAvailable = 1, coolDownTime = 7000, name = "Stomp", CommanderId = 1, aggressive = true, kineticAttack = 25, areaOfEffectRadius = 3, taskBarBadgeUrl = "/images/graphics/abilities/commander/stomp.png", description = "Sends out a shock wave damaging enemies around you" },
                 new CommanderAbility { Id = 2, levelAvailable = 3, coolDownTime = 5000, name = "Slug Strike", CommanderId = 1, aggressive = true, kineticAttack = 62, areaOfEffectRadius = 0, taskBarBadgeUrl = "/images/graphics/abilities/commander/slugstrike.png", description = "Powerful slug shot" },

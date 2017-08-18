@@ -528,19 +528,18 @@ var AssetsManager = (function () {
         var meshTask = this._assets.addMeshTask("skull task", "", meshUrl, "buggy.babylon");
         meshTask.onSuccess = function (task) {
             // http://www.html5gamedevs.com/topic/6732-question-about-mesh-impostor/
-            var mesh = BABYLON.Mesh.MergeMeshes(task.loadedMeshes);
-            mesh.position = BABYLON.Vector3.Zero();
-            mesh.name = commander.name + "_mesh";
-            mesh.showBoundingBox = true;
-            mesh.position = startingVector;
-            mesh.edgesWidth = 20;
-            mesh.outlineWidth = 20;
-            mesh.physicsImpostor = new BABYLON.PhysicsImpostor(mesh, BABYLON.PhysicsImpostor.BoxImpostor, {
+            commander.mesh = BABYLON.Mesh.MergeMeshes(task.loadedMeshes);
+            commander.mesh.position = BABYLON.Vector3.Zero();
+            commander.mesh.name = commander.name + "_mesh";
+            commander.mesh.showBoundingBox = true;
+            commander.mesh.position = startingVector;
+            commander.mesh.edgesWidth = 20;
+            commander.mesh.outlineWidth = 20;
+            commander.mesh.physicsImpostor = new BABYLON.PhysicsImpostor(commander.mesh, BABYLON.PhysicsImpostor.BoxImpostor, {
                 mass: commander.physics.mass,
                 restitution: commander.physics.restitution,
                 friction: commander.physics.friction
             }, this._scene);
-            commander.mesh = mesh;
         };
     };
     AssetsManager.prototype.setTerrain = function (url, scene, manifest, reject) {
@@ -1434,6 +1433,7 @@ var commander_1 = __webpack_require__(14);
 var Character = (function () {
     function Character(username, campaign, scene) {
         this.zoom = 0;
+        debugger;
         // find user in campaign
         this._player = this.findUserInCampaign(username, campaign);
         this.playerId = this._player.username;
