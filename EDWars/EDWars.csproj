@@ -217,67 +217,9 @@
     <Compile Include="Hubs\Game.cs" />
     <Compile Include="Hubs\LobbyChat.cs" />
     <Compile Include="Hubs\MatchMaking.cs" />
-    <Compile Include="Migrations\201603031232481_init.cs" />
-    <Compile Include="Migrations\201603031232481_init.Designer.cs">
-      <DependentUpon>201603031232481_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603031239306_ProfileFixNulls.cs" />
-    <Compile Include="Migrations\201603031239306_ProfileFixNulls.Designer.cs">
-      <DependentUpon>201603031239306_ProfileFixNulls.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603091548471_playerfktest.cs" />
-    <Compile Include="Migrations\201603091548471_playerfktest.Designer.cs">
-      <DependentUpon>201603091548471_playerfktest.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603110859427_texturemapandheightmap.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Migrations\201603110859427_texturemapandheightmap.Designer.cs">
-      <DependentUpon>201603110859427_texturemapandheightmap.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603110901390_skyboxprop.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Migrations\201603110901390_skyboxprop.Designer.cs">
-      <DependentUpon>201603110901390_skyboxprop.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603111019523_streamlinedmodel.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Migrations\201603111019523_streamlinedmodel.Designer.cs">
-      <DependentUpon>201603111019523_streamlinedmodel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603111519550_mapstartingpoint.cs" />
-    <Compile Include="Migrations\201603111519550_mapstartingpoint.Designer.cs">
-      <DependentUpon>201603111519550_mapstartingpoint.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201603112003130_defaultteamsides.cs" />
-    <Compile Include="Migrations\201603112003130_defaultteamsides.Designer.cs">
-      <DependentUpon>201603112003130_defaultteamsides.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708101539572_thebigshort.cs" />
-    <Compile Include="Migrations\201708101539572_thebigshort.Designer.cs">
-      <DependentUpon>201708101539572_thebigshort.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708171316357_beef2.cs" />
-    <Compile Include="Migrations\201708171316357_beef2.Designer.cs">
-      <DependentUpon>201708171316357_beef2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708171414551_teeth.cs" />
-    <Compile Include="Migrations\201708171414551_teeth.Designer.cs">
-      <DependentUpon>201708171414551_teeth.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708171416244_teeth2.cs" />
-    <Compile Include="Migrations\201708171416244_teeth2.Designer.cs">
-      <DependentUpon>201708171416244_teeth2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708171434248_teeth3.cs" />
-    <Compile Include="Migrations\201708171434248_teeth3.Designer.cs">
-      <DependentUpon>201708171434248_teeth3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201708171435505_teeth4.cs" />
-    <Compile Include="Migrations\201708171435505_teeth4.Designer.cs">
-      <DependentUpon>201708171435505_teeth4.cs</DependentUpon>
+    <Compile Include="Migrations\201708241129527_init.cs" />
+    <Compile Include="Migrations\201708241129527_init.Designer.cs">
+      <DependentUpon>201708241129527_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
@@ -614,51 +556,6 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201603031232481_init.resx">
-      <DependentUpon>201603031232481_init.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603031239306_ProfileFixNulls.resx">
-      <DependentUpon>201603031239306_ProfileFixNulls.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603091548471_playerfktest.resx">
-      <DependentUpon>201603091548471_playerfktest.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603110859427_texturemapandheightmap.resx">
-      <DependentUpon>201603110859427_texturemapandheightmap.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603110901390_skyboxprop.resx">
-      <DependentUpon>201603110901390_skyboxprop.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603111019523_streamlinedmodel.resx">
-      <DependentUpon>201603111019523_streamlinedmodel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603111519550_mapstartingpoint.resx">
-      <DependentUpon>201603111519550_mapstartingpoint.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201603112003130_defaultteamsides.resx">
-      <DependentUpon>201603112003130_defaultteamsides.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708101539572_thebigshort.resx">
-      <DependentUpon>201708101539572_thebigshort.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708171316357_beef2.resx">
-      <DependentUpon>201708171316357_beef2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708171414551_teeth.resx">
-      <DependentUpon>201708171414551_teeth.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708171416244_teeth2.resx">
-      <DependentUpon>201708171416244_teeth2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708171434248_teeth3.resx">
-      <DependentUpon>201708171434248_teeth3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201708171435505_teeth4.resx">
-      <DependentUpon>201708171435505_teeth4.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <TypeScriptCompile Include="Scripts\source\assets\Asset.ts" />
     <TypeScriptCompile Include="Scripts\source\assets\GameStatistics.ts" />
     <TypeScriptCompile Include="Scripts\source\assets\Map.ts" />
@@ -680,6 +577,11 @@
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201708241129527_init.resx">
+      <DependentUpon>201708241129527_init.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

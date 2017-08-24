@@ -13,7 +13,7 @@ namespace EDWars.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201603031232481_init"; }
+            get { return "201708241129527_init"; }
         }
         
         string IMigrationMetadata.Source
