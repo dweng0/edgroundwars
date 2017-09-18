@@ -536,9 +536,9 @@ var AssetsManager = (function () {
             commander.mesh.edgesWidth = 20;
             commander.mesh.outlineWidth = 20;
             commander.mesh.physicsImpostor = new BABYLON.PhysicsImpostor(commander.mesh, BABYLON.PhysicsImpostor.BoxImpostor, {
-                mass: commander.physics.mass,
-                restitution: commander.physics.restitution,
-                friction: commander.physics.friction
+                mass: manifest.physics.mass,
+                restitution: manifest.physics.restitution,
+                friction: manifest.physics.friction
             }, this._scene);
         };
     };

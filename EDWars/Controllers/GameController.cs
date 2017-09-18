@@ -77,22 +77,22 @@ namespace EDWars.Controllers
 
         private ActionResult MapPath(string mapName, string resource, string resourceId)
         {
-            mapName = mapName.ToLower();
-            var map = db.Maps.FirstOrDefault(c => c.name.ToLower() == mapName);
+            mapName = mapName.ToLower()+"/";
+            var map = db.Maps.FirstOrDefault(c => c.assetUrl.ToLower() == mapName);
 
             if (map != null && !resource.IsNullOrWhiteSpace())
             {
-                var dir = Server.MapPath("/assets/maps/"+map.name);
+                var dir = Server.MapPath("/assets/maps/"+map.assetUrl);
                 switch (resource.ToLower())
                 {
                     case "skybox" :
                     {
-                        var path = dir + "/skybox/" + resourceId; //validate the path for security or use other means to generate the path.
+                        var path = dir + "skybox/" + resourceId; //validate the path for security or use other means to generate the path.
                         return File(path, "image/jpeg");
                     }
                     case "texture":
                     {
-                        var path = dir + "/" + resourceId; //validate the path for security or use other means to generate the path.
+                        var path = dir + resourceId; //validate the path for security or use other means to generate the path.
                         return File(path, "image/jpeg");
                     }
                    
@@ -111,12 +111,13 @@ namespace EDWars.Controllers
             
             if (character != null && !resource.IsNullOrWhiteSpace())
             {
-                var dir = Server.MapPath("/assets/commanders/" + character.name);
+                var dir = Server.MapPath("/assets/commanders/" + characterName);
                 switch (resource.ToLower())
                 {
                     case "manifest":
-                        {
-                            return Json(db.CharacterDatas.Find(character.Id), JsonRequestBehavior.AllowGet);
+                    {
+                            var chracterManifest = db.CharacterDatas.Find(character.Id);
+                         return Json(db.CharacterDatas.Find(character.Id), JsonRequestBehavior.AllowGet);
                         }
                     case "meshes":
                     {

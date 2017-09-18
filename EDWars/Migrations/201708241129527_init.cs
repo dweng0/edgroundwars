@@ -22,10 +22,10 @@ namespace EDWars.Migrations
                         MasterId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.id)
-                .ForeignKey("dbo.Teams", t => t.BlueTeamId, cascadeDelete: true)
+                .ForeignKey("dbo.Teams", t => t.BlueTeamId, cascadeDelete: false)
                 .ForeignKey("dbo.Maps", t => t.mapId)
-                .ForeignKey("dbo.Teams", t => t.RedTeamId, cascadeDelete: true)
-                .ForeignKey("dbo.Teams", t => t.SpectatingTeamId, cascadeDelete: true)
+                .ForeignKey("dbo.Teams", t => t.RedTeamId, cascadeDelete: false)
+                .ForeignKey("dbo.Teams", t => t.SpectatingTeamId, cascadeDelete: false)
                 .Index(t => t.mapId)
                 .Index(t => t.RedTeamId)
                 .Index(t => t.BlueTeamId)
