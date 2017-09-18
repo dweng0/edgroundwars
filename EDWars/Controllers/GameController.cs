@@ -116,8 +116,10 @@ namespace EDWars.Controllers
                 {
                     case "manifest":
                     {
-                            var chracterManifest = db.CharacterDatas.Find(character.Id);
-                         return Json(db.CharacterDatas.Find(character.Id), JsonRequestBehavior.AllowGet);
+                            var characterManifest = db.CharacterDatas.Find(character.CharacterDataId);
+                            var physics = db.CharacterPhysics.Find(characterManifest.CharacterPhysicsId);
+                        characterManifest.physics = physics;
+                            return Json(characterManifest, JsonRequestBehavior.AllowGet);
                         }
                     case "meshes":
                     {

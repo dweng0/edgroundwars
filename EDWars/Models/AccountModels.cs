@@ -24,6 +24,7 @@ namespace EDWars.Models
         public DbSet<PlayerStats> PlayerStats { get; set; }
         public DbSet<UrlManifest> Manifests { get; set; }
         public DbSet<CharacterData> CharacterDatas { get; set; }
+        public DbSet<CharacterPhysics> CharacterPhysics { get; set; }
         public DbSet<CommanderAbility> CommanderAbilities { get; set; }
         public DbSet<FactionAbility> FactionAbilities { get; set; }
         public DbSet<Game> Game { get; set; }

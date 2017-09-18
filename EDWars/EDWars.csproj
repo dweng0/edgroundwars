@@ -221,6 +221,18 @@
     <Compile Include="Migrations\201708241129527_init.Designer.cs">
       <DependentUpon>201708241129527_init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709181234073_test.cs" />
+    <Compile Include="Migrations\201709181234073_test.Designer.cs">
+      <DependentUpon>201709181234073_test.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709181235380_lol.cs" />
+    <Compile Include="Migrations\201709181235380_lol.Designer.cs">
+      <DependentUpon>201709181235380_lol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709181244089_lol2.cs" />
+    <Compile Include="Migrations\201709181244089_lol2.Designer.cs">
+      <DependentUpon>201709181244089_lol2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Campaign.cs" />
@@ -581,6 +593,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201708241129527_init.resx">
       <DependentUpon>201708241129527_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709181234073_test.resx">
+      <DependentUpon>201709181234073_test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709181235380_lol.resx">
+      <DependentUpon>201709181235380_lol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709181244089_lol2.resx">
+      <DependentUpon>201709181244089_lol2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

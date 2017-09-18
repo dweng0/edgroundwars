@@ -38,6 +38,7 @@ namespace EDWars.Migrations
                 new Commander
                 {
                     Id = 1,
+                    CharacterDataId = 1,
                     assetsUrl = "/r",
                     name = "R",
                     description = "A true commander",
@@ -59,6 +60,7 @@ namespace EDWars.Migrations
                 {
                     Id = 2,
                     assetsUrl = "/izella",
+                    CharacterDataId = 1,
                     name = "Izella",
                     description = "Needs a swanky description",
                     baseAgility = 3,
@@ -78,8 +80,12 @@ namespace EDWars.Migrations
 
                 );
             context.Maps.AddOrUpdate(
-                new Map { id = 1, redStartingPointX = -30, redStartingPointY = 9, redStartingPointZ = -108, blueStartingPointX = -79, blueStartingPointY = 13, blueStartingPointZ = 94, description = "A planet on the edge of civilized space, packed with enough resources to start the next expedition. Factions have been posturing for control, now they have sent in their best commanders ", imageUrl = "/images/maps/stargazer.jpg", maxPlayers = 8, name = "Star Gazer", timesPicked = 0, assetUrl = "stargazer/" },
+                new Map {width = 500, height = 500, subDivisions  = 10, MapPhysicsId = 1, id = 1, redStartingPointX = -30, redStartingPointY = 9, redStartingPointZ = -108, blueStartingPointX = -79, blueStartingPointY = 13, blueStartingPointZ = 94, description = "A planet on the edge of civilized space, packed with enough resources to start the next expedition. Factions have been posturing for control, now they have sent in their best commanders ", imageUrl = "/images/maps/stargazer.jpg", maxPlayers = 8, name = "Star Gazer", timesPicked = 0, assetUrl = "stargazer/" },
                 new Map { id = 2, description = "[COMING SOON] - The sensitive payload on this shipwreck has got all factions scrambling to recover it.", imageUrl = "/images/maps/shipwreck.png", maxPlayers = 8, name = "Shipwreck", timesPicked = 0 }
+                );
+
+            context.MapPhysics.AddOrUpdate(
+                new MapPhysics { friction = 0.8, Id = 1, mass = 0, restitution = 0.8}
                 );
 
             context.CommanderAbilities.AddOrUpdate(
@@ -113,15 +119,24 @@ namespace EDWars.Migrations
                     Id = 1,
                     meshes = new string[] { "que", "meh"},
                     height = 5,
-                    meshUrl = "buggy.babylon",
+                    meshUrl = "/meshes/",
+                    
                     number = 1,
-                    physics = new CharacterPhysics() { friction = 0.8, Id = 1, restitution = 0.8, mass = 1},
+                    CharacterPhysicsId = 1,
                     textureUrl = "texture.jpg"
 
                 }
                 );
 
-
+            context.CharacterPhysics.AddOrUpdate(
+                new CharacterPhysics
+                {
+                    Id = 1,
+                    mass = -1,
+                    friction = 0.5,
+                    restitution = 0.5
+                }
+                );
             // commnder.experience algorithm example
             //http://gamedev.stackexchange.com/questions/974/how-to-determine-the-amount-of-experience-needed-for-leveling-up?rq=1
             // xpNumber = (game.expBase * commander.currentLevel) 

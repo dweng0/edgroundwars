@@ -143,6 +143,8 @@ namespace EDWars.Models
         public string textureUrl { get; set; }
         public int number { get; set; }
         public string meshUrl { get; set; }
+        public int? CharacterPhysicsId { get; set; }
+        [ForeignKey("CharacterPhysicsId")]
         public CharacterPhysics physics { get; set; }
         public string[] meshes{ get; set; }
     }
@@ -173,6 +175,9 @@ namespace EDWars.Models
 
         public virtual List<CommanderAbility> abilities { get; set; }
 
+        public int? CharacterDataId { get; set; }
+        [ForeignKey("CharacterDataId")]
+        public CharacterData CharacterData { get; set; }
         public int level { get; set; } //used in the instance
         public int experiencePoints { get; set; } //used in the instance
     }
