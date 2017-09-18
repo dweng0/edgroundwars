@@ -46,7 +46,7 @@ namespace EDWars.Controllers
                     var worldPhysics = new WorldPhysics();
                     worldPhysics.gravityVector = new GravityVector();
                     worldPhysics.gravityVector.x = 0;
-                    worldPhysics.gravityVector.y = 20;
+                    worldPhysics.gravityVector.y = -20;
                     worldPhysics.gravityVector.z = 0;
 
                     var manifest = new UrlManifest();
