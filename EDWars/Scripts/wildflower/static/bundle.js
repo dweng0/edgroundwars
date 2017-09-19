@@ -465,8 +465,8 @@ var AssetsManager = (function () {
             _this.getAvatarStatistics(_this._scene, _this._manifest).then(function (characterData) {
                 _this._loadedAvatarStatistics = characterData;
                 _this._assets.load();
-            }).catch(function () {
-                throw new Error('Failed to load Players');
+            }).catch(function (error) {
+                throw error;
             });
             _this._assets.onFinish = function (tasks) {
                 console.log('tasks finished');
@@ -508,7 +508,7 @@ var AssetsManager = (function () {
                     if (loadCharacter(redPlayer, redStartingVector, response)) {
                         resolve(loadedCharacters);
                     }
-                }).catch(function () { throw new Error("Failed to load character manifest"); });
+                }).catch(function (error) { throw error; });
             });
             // load blue team avatars
             _this._campaign.blueTeam.players.forEach(function (bluePlayer) {
@@ -518,7 +518,7 @@ var AssetsManager = (function () {
                     if (loadCharacter(bluePlayer, blueStartingVector, response)) {
                         resolve(loadedCharacters);
                     }
-                }).catch(function () { throw new Error("Failed to load character manifest"); });
+                }).catch(function (error) { throw error; });
             });
         });
     };

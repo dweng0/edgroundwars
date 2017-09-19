@@ -214,6 +214,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Timeout.cs" />
+    <Compile Include="Hubs\Game - Copy.cs" />
     <Compile Include="Hubs\Game.cs" />
     <Compile Include="Hubs\LobbyChat.cs" />
     <Compile Include="Hubs\MatchMaking.cs" />
